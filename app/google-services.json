@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "372046736034",
+    "firebase_url": "https://blocnotev3-73d17.firebaseio.com",
+    "project_id": "blocnotev3-73d17",
+    "storage_bucket": "blocnotev3-73d17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372046736034:android:f81e5ff50ae5356a",
+        "android_client_info": {
+          "package_name": "com.example.blocnotev3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372046736034-80nuf1e53t05skn1sl32f91qtlrgt034.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blocnotev3",
+            "certificate_hash": "9b0269c68d261d0dde695502eca39aca2f2ff522"
+          }
+        },
+        {
+          "client_id": "372046736034-5ikg7iskmfmlhumds8r7uvrp74vbpdri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7Z_1IsYlzOsG9Bzda2EdaJdOVNbAH_EE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372046736034-5ikg7iskmfmlhumds8r7uvrp74vbpdri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
