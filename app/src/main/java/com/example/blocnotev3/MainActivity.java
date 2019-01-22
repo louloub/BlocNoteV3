@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -15,8 +16,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Création des bouttons
     EditText editText;
     TextView textView;
-
-    // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText.setOnClickListener(this);
         textView.setOnClickListener(this);
 
+
+
         // Interprétation du "textView" avec le "editView" avec la méthode "addTextChangedListener"
         editText.addTextChangedListener(new TextWatcher() {
 
@@ -41,14 +42,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // inserer le "s" dans le textview
 
                 textView.setText(s);
-                // ---------------------
-                // TEXT TO FIREBASE
-                // ---------------------
 
                 // convertir le "CharSequence" (s) en "String" (ss) pour l'objet "Note"
-                // String ss = s.toString();
+                //String ss = s.toString();
+
+                // ----------
+                // FIREBASE
+                // ----------
+
+                // FirebaseFirestore db = FirebaseFirestore.getInstance();
                 // Modifier "Message" dans "Note" avec "ss"
                 // db.collection("notes").add(ss);
+                // DatabaseReference myRef = db.getReference(ss);
+                // myRef.setValue("Hello, World!");
+
+                // EXEMPLE FIREBASE :
+                // FirebaseDatabase database = FirebaseDatabase.getInstance();
+                // DatabaseReference myRef = database.getReference("message");
+                // myRef.setValue("Hello, World!");
+
             }
 
             @Override
@@ -70,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Que faire juste après que le changement de texte a été pris en compte ?
 
             }
-        });
+        }); */
     }
 
     @Override
