@@ -7,17 +7,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FileHelper {
-    final static String TAG = FileHelper.class.getName();
     private static final String COLLECTION_NAME = "notes";
 
     public static Task<DocumentReference> saveToFirebase(String textMessage){
 
         Map<String, Object> user = new HashMap<>();
+        // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
         user.put("first", textMessage);
 
         return Helper.getChatCollection()
                 .document("document")
                 .collection(COLLECTION_NAME)
                 .add(user);
+
     }
 }

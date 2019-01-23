@@ -10,7 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class  MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,19 +42,9 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
               FileHelper.saveToFirebase(textInput.getText().toString());
+                Toast.makeText(MainActivity.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
             }
-
-            // if (FileHelper.saveToFirebase(textInput.getText().toString())){
-            //     Toast.makeText(MainActivity.this, "Saved to Firestore", Toast.LENGTH_SHORT).show();
-            // }else{
-            //     Toast.makeText(MainActivity.this, "Error to save", Toast.LENGTH_SHORT).show();
-            // }
-                // textToSend = textInput;
-                // EditText textToSend = null;
-                // textToSend.setText("s");
-
         });
-
     }
 
     @Override
@@ -56,54 +52,3 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
 
     }
 }
-// textInput.addTextChanged
-
-// ---------------------
-// TEXT TO FIREBASE
-// ---------------------
-
-// EditText textToSend = null;
-// textToSend.setText("s");
-
-// convertir le "CharSequence" (s) en "String" (ss) pour l'objet "Note"
-// String ss = s.toString();
-// Modifier "Message" dans "Note" avec "ss"
-// db.collection("notes").add(ss);
-
-// ---------------------
-// CODE CHOPPE EN LIGNE
-// ---------------------
-// btnSave = (Button) findViewById(R.id.btnSave);
-//         btnSave.setOnClickListener(new View.OnClickListener() {
-// @Override
-// public void onClick(View v) {
-//         if (FileHelper.saveToFile( txtInput.getText().toString())){
-//         Toast.makeText(MainActivity.this,"Saved to file",Toast.LENGTH_SHORT).show();
-//         }else{
-//         Toast.makeText(MainActivity.this,"Error save file!!!",Toast.LENGTH_SHORT).show();
-//         }
-//         }
-//        });
-
-// ---------------------
-// METHODE ADDTEXTCHANGEDLISTENTER
-// ---------------------
-
-/* textInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // textInput.setText(s);
-                // String textToSend = s.toString();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        */

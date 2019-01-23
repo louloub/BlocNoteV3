@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BlocNoteV3</string>
+    <string name="sauvegarder">Sauvegarder</string>
 </resources>
