@@ -1,21 +1,31 @@
 package com.example.blocnotev3;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.HashMap;
+import java.util.Map;
+
+public class  MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Création des bouttons
     EditText editText;
-    TextView textView;
+    Button button;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,65 +34,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Lien bouttons code
         editText = findViewById(R.id.editText);
-        textView = findViewById(R.id.textView);
+        button = findViewById(R.id.button);
 
         // Création des listener
         editText.setOnClickListener(this);
-        textView.setOnClickListener(this);
 
-
-
-        // Interprétation du "textView" avec le "editView" avec la méthode "addTextChangedListener"
         editText.addTextChangedListener(new TextWatcher() {
-
             @Override
-            // "CharSequence s" etc sont les paramètres de la méthode, ce qu'on peut utiliser dedans
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Que faire au moment où le texte change ?
-                // inserer le "s" dans le textview
-
-                textView.setText(s);
-
-                // convertir le "CharSequence" (s) en "String" (ss) pour l'objet "Note"
-                //String ss = s.toString();
-
-                // ----------
-                // FIREBASE
-                // ----------
-
-                // FirebaseFirestore db = FirebaseFirestore.getInstance();
-                // Modifier "Message" dans "Note" avec "ss"
-                // db.collection("notes").add(ss);
-                // DatabaseReference myRef = db.getReference(ss);
-                // myRef.setValue("Hello, World!");
-
-                // EXEMPLE FIREBASE :
-                // FirebaseDatabase database = FirebaseDatabase.getInstance();
-                // DatabaseReference myRef = database.getReference("message");
-                // myRef.setValue("Hello, World!");
-
-            }
-
-            @Override
-            /**
-             * @param s La chaîne qui a été modifiée
-             * @param count Le nombre de caractères concernés
-             * @param start L'endroit où commence la modification dans la chaîne
-             * @param after La nouvelle taille du texte
-             */
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            /**
-             * @param s L'endroit où le changement a été effectué
-             */
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                editText.setText(s);
+            }
+
+            @Override
             public void afterTextChanged(Editable s) {
-                // Que faire juste après que le changement de texte a été pris en compte ?
 
             }
-        }); */
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // textToSend = editText;
+                // EditText textToSend = null;
+                // textToSend.setText("s");
+            }
+        });
+
     }
 
     @Override
@@ -90,3 +73,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 }
+// editText.addTextChanged
+
+// ---------------------
+// TEXT TO FIREBASE
+// ---------------------
+
+// EditText textToSend = null;
+// textToSend.setText("s");
+
+// convertir le "CharSequence" (s) en "String" (ss) pour l'objet "Note"
+// String ss = s.toString();
+// Modifier "Message" dans "Note" avec "ss"
+// db.collection("notes").add(ss);
