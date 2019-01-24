@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 // Methode auth par email
                                 .setAvailableProviders(
                                         Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), // EMAIL
+                                                new AuthUI.IdpConfig.FacebookBuilder().build(), // FACEBOOK
                                                 new AuthUI.IdpConfig.GoogleBuilder().build())) // GOOGLE
                                 .setIsSmartLockEnabled(false, true)
                                 .setLogo(R.drawable.ic_logo_auth)
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
-
+/*
     @Override
     public void onStart() {
         super.onStart();
@@ -74,12 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateUI(currentUser);
     }
 
-
-
     private void updateUI(FirebaseUser user) {
     }
-
-
+*/
     @Override
     public void onClick(View v) {
 
