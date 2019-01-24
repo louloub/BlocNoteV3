@@ -1,4 +1,4 @@
-package com.example.blocnotev3;
+package com.example.blocnotev3.Auth;
 
 import android.content.Intent;
 

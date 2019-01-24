@@ -1,4 +1,4 @@
-package com.example.blocnotev3;
+package com.example.blocnotev3.Helper;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;

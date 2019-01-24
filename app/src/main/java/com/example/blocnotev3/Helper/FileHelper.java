@@ -1,4 +1,4 @@
-package com.example.blocnotev3;
+package com.example.blocnotev3.Helper;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -18,7 +18,15 @@ public class FileHelper {
         return Helper.getChatCollection()
                 .document("document")
                 .collection(COLLECTION_NAME)
-                .add(user);
+                .add(user)
+                ;
 
     }
 }
+
+/*
+return Helper.getChatCollection()
+                .document("document")
+                .collection(COLLECTION_NAME)
+                .add(user);
+ */
