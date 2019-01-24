@@ -11,39 +11,19 @@ import com.example.blocnotev3.Helper.FileHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class  MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    // Création des bouttons
-    EditText textInput;
-    Button button;
+public class  MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Déclaration FirebaseAuth
     private FirebaseAuth mAuth;
 
-    // FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up);
 
         // Initialisation de l'instance "FirebaseAuth"
         mAuth = FirebaseAuth.getInstance();
-
-        // Lien bouttons code
-        textInput = findViewById(R.id.editText);
-        button = findViewById(R.id.button);
-
-        // Création des listener
-        textInput.setOnClickListener(this);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              FileHelper.saveToFirebase(textInput.getText().toString());
-                Toast.makeText(MainActivity.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override
@@ -56,7 +36,6 @@ public class  MainActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser currentUser) {
     }
-
 
     @Override
     public void onClick(View v) {
