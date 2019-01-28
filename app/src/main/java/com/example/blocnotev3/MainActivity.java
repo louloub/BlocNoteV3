@@ -1,5 +1,7 @@
 package com.example.blocnotev3;
 
+import android.content.ContentProvider;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.blocnotev3.Auth.ProfilActivity;
+import com.example.blocnotev3.Base.NotesListe;
 import com.example.blocnotev3.Helper.FileHelper;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Déclaration FirebaseAuth
     private FirebaseAuth mAuth;
 
-    // Déclaration Boutton
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +41,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                this.startSignInActivity();
+                // Si l'utilisateur est connecté, alors on passe sur l'activité suivante
+                // Start appropriate activity
+                if (this.isCurrentUserLogged()) {
+                    this.startNotesListeActivity();
+                } else {
+                    this.startSignInActivity();
+                }
 
+            }
+
+            // L'utilisateur actuel est il connecté ?
+            protected Boolean isCurrentUserLogged() {
+                return (this.getCurrentUser() !=null);
+            }
+
+            // Récupère l'utilisateur actuellement connecté à l'app
+            protected FirebaseUser getCurrentUser() {
+                return FirebaseAuth.getInstance().getCurrentUser();
+            }
+
+            // Launching Profile Activity
+            private void startNotesListeActivity() {
+                Intent intent = new Intent(MainActivity.this, NotesListe.class);
+                startActivity(intent);
             }
 
             // Launch Sign-In Activity

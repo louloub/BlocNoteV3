@@ -34,7 +34,7 @@ public class NotesListe extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         // Création des listener
-        textInput.setOnClickListener((View.OnClickListener) this);
+        // textInput.setOnClickListener((View.OnClickListener) this);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
