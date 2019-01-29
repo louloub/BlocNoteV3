@@ -1,5 +1,6 @@
 package com.example.blocnotev3.Base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.blocnotev3.CreateNote;
 import com.example.blocnotev3.Helper.FileHelper;
 import com.example.blocnotev3.MainActivity;
 import com.example.blocnotev3.R;
@@ -20,6 +22,7 @@ public class NotesListe extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText textInput;
     Button button;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class NotesListe extends AppCompatActivity {
         // Lien bouttons code
         textInput = findViewById(R.id.editText);
         button = findViewById(R.id.button);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
 
         // Création des listener
         // textInput.setOnClickListener((View.OnClickListener) this);
@@ -41,6 +45,14 @@ public class NotesListe extends AppCompatActivity {
             public void onClick(View v) {
                 FileHelper.saveToFirebase(textInput.getText().toString());
                 Toast.makeText(NotesListe.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotesListe.this, CreateNote.class);
+                startActivity(intent);
             }
         });
     }
