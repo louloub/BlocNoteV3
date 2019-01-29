@@ -38,9 +38,6 @@ public class ProfilActivity extends BaseActivity {
     @BindView(R.id.profile_activity_progress_bar)
     ProgressBar progressBar;
 
-    // 1 - Adding CheckBox Mentor View
-    @BindView(R.id.profile_activity_check_box_is_mentor)CheckBox checkBoxIsMentor;
-
     // FOR DATA
     // Identify each http Request
     private static final int SIGN_OUT_TASK = 10;
@@ -65,16 +62,11 @@ public class ProfilActivity extends BaseActivity {
     // ACTIONS
     // --------------------
 
-    // 5 - Update onClick Listeners w/ firebase
+    // Update onClick Listeners w/ firebase
 
     @OnClick(R.id.profile_activity_button_update)
     public void onClickUpdateButton() {
         this.updateUsernameInFirebase();
-    }
-
-    @OnClick(R.id.profile_activity_check_box_is_mentor)
-    public void onClickCheckBoxIsMentor() {
-        this.updateUserIsMentor();
     }
 
     @OnClick(R.id.profile_activity_button_sign_out)
@@ -111,7 +103,7 @@ public class ProfilActivity extends BaseActivity {
 
     private void deleteUserFromFirebase() {
         if (this.getCurrentUser() != null) {
-            //4 - We also delete user from firestore storage
+            // We also delete user from firestore storage
             Helper.deleteUser(this.getCurrentUser().getUid()).addOnFailureListener(this.onFailureListener());
             AuthUI.getInstance()
                     .delete(this)
@@ -119,14 +111,7 @@ public class ProfilActivity extends BaseActivity {
         }
     }
 
-    // 2 - Update User Mentor (is or not)
-    private void updateUserIsMentor() {
-        if (this.getCurrentUser() != null) {
-            Helper.updateIsMentor(this.getCurrentUser().getUid(), this.checkBoxIsMentor.isChecked()).addOnFailureListener(this.onFailureListener());
-        }
-    }
-
-    // 3 - Update User Username
+    // Update User Username
     private void updateUsernameInFirebase() {
 
         this.progressBar.setVisibility(View.VISIBLE);
@@ -155,7 +140,7 @@ public class ProfilActivity extends BaseActivity {
                     case DELETE_USER_TASK:
                         finish();
                         break;
-                    // 8 - Hiding Progress bar after request completed
+                    // Hiding Progress bar after request completed
                     case UPDATE_USERNAME:
                         progressBar.setVisibility(View.INVISIBLE);
                         break;
@@ -183,18 +168,6 @@ public class ProfilActivity extends BaseActivity {
             String email = TextUtils.isEmpty(this.getCurrentUser().getEmail()) ? getString(R.string.info_no_email_found) : this.getCurrentUser().getEmail();
             this.textViewEmail.setText(email);
 
-            // 7 - Get additional data from Firestore (isMentor & Username)
-            /*
-            UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    User currentUser = documentSnapshot.toObject(User.class);
-                    String username = TextUtils.isEmpty(getCurrentUser().getDisplayName()) ? getString(R.string.info_no_username_found) : getCurrentUser().getDisplayName();
-                    checkBoxIsMentor.setChecked(currentUser.getIsMentor());
-                    textInputEditTextUsername.setText(username);
-                }
-            });
-            */
         }
     }
 }

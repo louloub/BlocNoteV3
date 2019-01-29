@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
 
         Button button = findViewById(R.id.main_activity_button_login);
-        // On ajoute le paramétre "button" à la méthode appelée
+        // On ajoute le paramétre "button" à la méthode appelée "updateUIWhenResuming"
         this.updateUIWhenResuming(button);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -174,50 +174,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected FirebaseUser getCurrentUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
-/*
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
 
-    private void updateUI(FirebaseUser user) {
-    }
-*/
     @Override
     public void onClick(View v) {
 
     }
 }
-
-/*
-
------------
--- onCreate
------------
-@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Initialisation de l'instance "FirebaseAuth"
-        mAuth = FirebaseAuth.getInstance();
-
-        // Lien bouttons code
-        textInput = findViewById(R.id.editText);
-        button = findViewById(R.id.button);
-
-        // Création des listener
-        textInput.setOnClickListener(this);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              FileHelper.saveToFirebase(textInput.getText().toString());
-                Toast.makeText(MainActivity.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
- */

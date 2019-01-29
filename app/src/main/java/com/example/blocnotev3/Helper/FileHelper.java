@@ -4,6 +4,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 public class FileHelper {
@@ -20,7 +21,6 @@ public class FileHelper {
                 .collection(COLLECTION_NAME)
                 .add(user)
                 ;
-
     }
 }
 
@@ -29,4 +29,7 @@ return Helper.getChatCollection()
                 .document("document")
                 .collection(COLLECTION_NAME)
                 .add(user);
+                .collection("notes")
+                .orderBy("", "asc")
+
  */
