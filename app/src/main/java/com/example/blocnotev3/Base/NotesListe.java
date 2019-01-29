@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.blocnotev3.CreateNote;
@@ -20,8 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class NotesListe extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    EditText textInput;
-    Button button;
+    ListView listView;
     FloatingActionButton floatingActionButton;
 
     @Override
@@ -29,24 +29,9 @@ public class NotesListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
-        // Initialisation de l'instance "FirebaseAuth"
-        mAuth = FirebaseAuth.getInstance();
+        listView = findViewById(R.id.listView);
 
-        // Lien bouttons code
-        textInput = findViewById(R.id.editText);
-        button = findViewById(R.id.button);
         floatingActionButton = findViewById(R.id.floatingActionButton);
-
-        // Création des listener
-        // textInput.setOnClickListener((View.OnClickListener) this);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FileHelper.saveToFirebase(textInput.getText().toString());
-                Toast.makeText(NotesListe.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
-            }
-        });
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
