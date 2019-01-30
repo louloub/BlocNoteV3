@@ -1,7 +1,5 @@
 package com.example.blocnotev3.Helper;
 
-import android.annotation.SuppressLint;
-
 import com.example.blocnotev3.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -9,13 +7,25 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Helper {
-    private static final String COLLECTION_NAME = "chats";
+    private static final String CHAT_COLLECTION = "chats";
+    private static final String DOCUMENT_NAME = "document";
+    private static final String NOTE_COLLECTION = "notes";
+
+
 
     // --- COLLECTION REFERENCE ---
 
     public static CollectionReference getChatCollection(){
         return FirebaseFirestore.getInstance()
-                .collection(COLLECTION_NAME);
+                .collection(CHAT_COLLECTION);
+
+    }
+
+    public static CollectionReference getChatDocumentNotes (){
+        return FirebaseFirestore.getInstance()
+                .collection(CHAT_COLLECTION)
+                .document(DOCUMENT_NAME)
+                .collection(NOTE_COLLECTION);
 
     }
 
