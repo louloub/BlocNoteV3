@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.blocnotev3.Adapter.AdapterListe;
 import com.example.blocnotev3.CreateNote;
 import com.example.blocnotev3.Helper.FileHelper;
 import com.example.blocnotev3.Helper.Helper;
@@ -36,8 +37,7 @@ public class NotesListe extends AppCompatActivity {
     ListView listView;
     // Button Floating
     FloatingActionButton floatingActionButton;
-    // Création de l'array List qui contriendra les notes en "String"
-    private ArrayList <String> noteListe = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class NotesListe extends AppCompatActivity {
         setContentView(R.layout.activity_notes_liste);
 
         // ListView
-        listView = findViewById(R.id.listView);
+        // listView = findViewById(R.id.listView);
 
         // ---------
         // Récupération des données dans la BDD
@@ -58,12 +58,19 @@ public class NotesListe extends AppCompatActivity {
         chatDocumentNotes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                // Création de l'array List qui contriendra les notes en "String"
+                ArrayList <String> noteListe = new ArrayList<>();
                 if (task.isSuccessful()) {
                     // Parcourir tous les documents et donner les resultats (getResult)
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String stringNote = document.getString("first");
                         noteListe.add(stringNote);
                     }
+                    // Adapter
+                    ListView ListView = findViewById(R.id.listView);
+                    AdapterListe mMAdapterList = new AdapterListe(NotesListe.this, noteListe);
+                    ListView.setAdapter(mMAdapterList);
+
                 } else {
                 }
             }
