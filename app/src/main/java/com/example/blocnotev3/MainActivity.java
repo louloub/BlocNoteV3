@@ -32,7 +32,6 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     private static final int RC_SIGN_IN = 123;
 
     // Déclaration FirebaseAuth
@@ -101,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, NotesListe.class);
                 startActivity(intent);
             }
-
         });
     }
 
@@ -110,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setText
                 (this.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) : getString(R.string.button_login_text_not_logged));
     }
-
 
     // L'utilisateur actuel est il connecté ?
     protected Boolean isCurrentUserLogged() {

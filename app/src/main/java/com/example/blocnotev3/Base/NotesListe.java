@@ -30,10 +30,12 @@ import java.util.ArrayList;
 
 public class NotesListe extends AppCompatActivity {
 
+    // Firabase
     private FirebaseAuth mAuth;
+    // ListView
     ListView listView;
+    // Button Floating
     FloatingActionButton floatingActionButton;
-
     // Création de l'array List qui contriendra les notes en "String"
     private ArrayList <String> noteListe = new ArrayList<>();
 
@@ -42,7 +44,12 @@ public class NotesListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
+        // ListView
         listView = findViewById(R.id.listView);
+
+        // ---------
+        // Récupération des données dans la BDD
+        // ---------
 
         // Référence dans la BDD : "CollectionReference"
         // "DocumenRefrence" pour les documents uniquement
@@ -62,8 +69,11 @@ public class NotesListe extends AppCompatActivity {
             }
         });
 
-        floatingActionButton = findViewById(R.id.floatingActionButton);
+        // ---------
+        // Boutton Floating
+        // ---------
 
+        floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,14 +17,15 @@ public class FileHelper {
 
     DatabaseReference db;
     Boolean saved=null;
+    //ArrayList
     ArrayList<String> ArrayListNote=new ArrayList<>();
 
     public FileHelper(DatabaseReference db) {
         this.db = db;
     }
-
+    // Définition du nom de la collection
     private static final String COLLECTION_NAME = "notes";
-
+    // Methode qui sauvergarde les données en BDD
     public static Task<DocumentReference> saveToFirebase(String textMessage){
 
         Map<String, Object> user = new HashMap<>();
@@ -39,9 +40,8 @@ public class FileHelper {
     }
 
     // ------
-    // READ
+    // READ Firebase
     // ------
-
 
     public void fetchData(DataSnapshot noteSnapshot)
     {
