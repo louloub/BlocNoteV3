@@ -65,9 +65,7 @@ public class ProfilActivity extends BaseActivity {
     // Update onClick Listeners w/ firebase
 
     @OnClick(R.id.profile_activity_button_update)
-    public void onClickUpdateButton() {
-        this.updateUsernameInFirebase();
-    }
+    public void onClickUpdateButton() { this.updateUsernameInFirebase(); }
 
     @OnClick(R.id.profile_activity_button_sign_out)
     public void onClickSignOutButton() {

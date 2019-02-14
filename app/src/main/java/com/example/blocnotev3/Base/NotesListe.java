@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -33,14 +34,16 @@ public class NotesListe extends AppCompatActivity {
 
     // Firabase
     private FirebaseAuth mAuth;
+
     // ListView
     ListView listView;
+
     // Button Floating
     FloatingActionButton floatingActionButton;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
@@ -66,10 +69,12 @@ public class NotesListe extends AppCompatActivity {
                         String stringNote = document.getString("first");
                         noteListe.add(stringNote);
                     }
+
                     // Adapter
                     ListView ListView = findViewById(R.id.listView);
                     AdapterListe mMAdapterList = new AdapterListe(NotesListe.this, noteListe);
                     ListView.setAdapter(mMAdapterList);
+
 
                 } else {
                 }
@@ -90,4 +95,24 @@ public class NotesListe extends AppCompatActivity {
         });
     }
 }
+
+/*
+
+TEST1
+noteListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+TEST2
+noteListe.setOnItemClickListener(new AdapterListe.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+    });
+
+ */
 

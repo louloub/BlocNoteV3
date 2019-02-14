@@ -1,13 +1,17 @@
 package com.example.blocnotev3.Helper;
 
+import android.view.View;
+import android.widget.Button;
+
+import com.example.blocnotev3.R;
 import com.example.blocnotev3.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Helper {
-    // Création des noms de collections
+public class Helper implements View.OnClickListener{
+    // Création des noms de collections & documents
     private static final String CHAT_COLLECTION = "chats";
     private static final String DOCUMENT_NAME = "document";
     private static final String NOTE_COLLECTION = "notes";
@@ -64,5 +68,10 @@ public class Helper {
         return Helper.getChatCollection()
                 .document(uid)
                 .delete();
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

@@ -50,7 +50,7 @@ public class FileHelper {
         // "ds" : parcourir tous les noeuds (children) de la collection "notes"
         for (DataSnapshot ds : noteSnapshot.getChildren())
         {
-            // "name" récupère la valeur correspondant à la clé "first" qu'on récupère en "sring"
+            // "name" récupère la valeur correspondant à la clé "first" qu'on récupère en "string"
             String name = ds.child("first").getValue(String.class);
             // une fois récupéré on l'ajoute à la liste de note
             ArrayListNote.add(name);

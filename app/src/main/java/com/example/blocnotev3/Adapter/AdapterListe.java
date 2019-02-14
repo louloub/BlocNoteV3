@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.blocnotev3.Notes;
 import com.example.blocnotev3.R;
@@ -18,6 +19,7 @@ import com.example.blocnotev3.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.facebook.share.widget.ShareDialog.show;
 import static java.security.AccessController.getContext;
 
 public class AdapterListe extends ArrayAdapter<String> {
@@ -30,10 +32,17 @@ public class AdapterListe extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         if(convertView == null){
-            convertView =  ((Activity)getContext()).getLayoutInflater().inflate(R.layout.content_adapter_liste,parent,false);
+            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.content_adapter_liste,parent,false);
         }
 
         TextView titleTextView = convertView.findViewById(R.id.note_title);
+
+        titleTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // Récupérer la postiion de chaque item
         String item = getItem(position);

@@ -29,7 +29,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 123;
@@ -55,8 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 // Si l'utilisateur est connecté, alors on passe sur l'activité suivante
                 // Start appropriate activity
-
-                // this.startSignInActivity();
 
                 if (this.isCurrentUserLogged())
                 {
