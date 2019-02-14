@@ -1,5 +1,6 @@
 package com.example.blocnotev3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,5 +32,10 @@ public class CreateNote extends AppCompatActivity {
                 Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
             }
         });
+
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("item");
+        textInput.setText(str);
+
     }
 }
