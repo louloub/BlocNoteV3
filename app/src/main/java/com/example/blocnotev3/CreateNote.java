@@ -8,10 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.blocnotev3.Helper.FileHelper;
-import com.example.blocnotev3.Helper.Helper;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.blocnotev3.Note.uid;
 
 public class CreateNote extends AppCompatActivity {
 
@@ -24,6 +29,7 @@ public class CreateNote extends AppCompatActivity {
     private static final String CHAT_COLLECTION = "chats";
     private static final String DOCUMENT_NAME = "document";
     private static final String NOTE_COLLECTION = "notes";
+    private String currentUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,40 +46,70 @@ public class CreateNote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*
-                Helper.getChatCollection()
-                        .document(DOCUMENT_NAME)
-                        .collection(NOTE_COLLECTION)
-                        .document(note.uid)
-                        .set(Note.title, SetOptions.merge());
-                */
+                Map<String, Object> note = new HashMap<>();
 
-                // FileHelper.saveToFirebase();
-
-                FileHelper.saveToFirebase((Note) textInput.getText());
-
-
-                Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
-                // changeNoteCF(str);
+                if (currentUID == null) {
+                    saveToFirebase(note);
+                    Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
+                } else {
+                    changeToFirebase(note);
+                    Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
+        /*
         Note note = new Note();
         Intent intent = new Intent(this, FileHelper.class);
-        intent.putExtra("note", (Note) textInput.getText());
+        intent.putExtra("note", textInput.getText());
         startActivity(intent);
 
-        /*
+        Intent intent = new Intent();
+        Note noteIntent = (Note)intent.getSerializableExtra("note");
+        */
+
         Intent intent = getIntent();
-        String str = intent.getStringExtra("item");
-        textInput.setText(str);
-         */
+        String title = intent.getStringExtra("note");
+        String uid = intent.getStringExtra("uid");
 
-        // Note noteToUpdate = (Note) intent.getSerializableExtra("item");
-        // textInput.setText(noteToUpdate);
+        Note note = new Note(uid, title);
 
-        // changeNoteCF(str);
-        // button.changeNoteCF(String str);
+        this.currentUID = uid;
+
+        textInput.setText(title);
+    }
+
+    // Methode qui sauvergarde les données en BDD
+    public static Task<DocumentReference> saveToFirebase(Map<String, Object> note) {
+        Map<String, Object> noteMap = new HashMap<>();
+
+        return FirebaseFirestore.getInstance()
+                .collection(CHAT_COLLECTION)
+                .document(DOCUMENT_NAME)
+                .collection(NOTE_COLLECTION)
+                .add(noteMap);
+
+        // Map<String, Object> note = new HashMap<>();
+        // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
+        // note.put("first", textMessage);
+        // note.put("uid", uid);
+    }
+
+    public static Task<Void> changeToFirebase(Map<String, Object> note) {
+        Map<String, Object> noteMap = new HashMap<>();
+
+        return FirebaseFirestore.getInstance()
+                .collection(CHAT_COLLECTION)
+                .document(DOCUMENT_NAME)
+                .collection(NOTE_COLLECTION)
+                .document("uid")
+                .set(noteMap, SetOptions.merge());
+
+
+        // Map<String, Object> note = new HashMap<>();
+        // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
+        // note.put("first", textMessage);
+        // note.put("uid", uid);
     }
 
     // --------------------

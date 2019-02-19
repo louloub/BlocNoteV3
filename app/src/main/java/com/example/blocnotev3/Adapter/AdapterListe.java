@@ -33,15 +33,23 @@ public class AdapterListe extends ArrayAdapter<Note> {
                     .inflate(R.layout.content_adapter_liste,parent,false);
         }
 
-        final TextView titleTextView = convertView.findViewById(R.id.note_title);
 
+        final TextView titleTextView = convertView.findViewById(R.id.note_title);
         titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // Récupérer la note sur laquelle on click
+                Note currentNote = getItem(position);
+                String uid = currentNote.getUid();
+                String title = currentNote.getTitle();
+
                 Intent intent = new Intent(getContext(), CreateNote.class);
-                intent.putExtra("item", titleTextView.getText());
-                startActivity(getContext(),intent, Bundle.EMPTY);
+                intent.putExtra("uid", uid);
+                intent.putExtra("note", title);
+                startActivity(getContext(),intent,Bundle.EMPTY);
+
+                // INTENT
 
 
             }

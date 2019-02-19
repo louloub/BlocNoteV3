@@ -28,29 +28,6 @@ public class FileHelper {
     // Définition du nom de la collection
     private static final String NOTE_COLLECTION = "notes";
 
-    // Methode qui sauvergarde les données en BDD
-    public static Task<Void> saveToFirebase(Note note){
-
-        // Map<String, Object> note = new HashMap<>();
-        // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
-        // note.put("first", textMessage);
-        // note.put("uid", uid);
-
-        Intent intent = new Intent();
-        Note noteIntent = (Note)intent.getSerializableExtra("note");
-
-        return Helper.getChatCollection()
-                .document("document")
-                .collection(NOTE_COLLECTION)
-                .document(uid)
-                .set(uid, SetOptions.merge());
-
-        // .add(note);
-
-        //
-                // .add(note);
-    }
-
     // ------
     // READ Firebase
     // ------

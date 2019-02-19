@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Note implements Serializable {
+public class Note {
 
     // ----------------
     // Attributs |
     // ----------------
 
     public static String uid;
-    private String title;
+    public static String title;
 
     public Note() {}
 

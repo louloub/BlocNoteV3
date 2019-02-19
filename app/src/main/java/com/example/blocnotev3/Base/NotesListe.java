@@ -64,10 +64,8 @@ public class NotesListe extends AppCompatActivity {
 
                         String title = document.getString("first");
                         String uid = document.getId();
-                        // String uid = document.getKey();
 
                         Note note = new Note(uid, title);
-
                         noteListe.add(note);
                     }
 
