@@ -11,16 +11,17 @@ import android.widget.TextView;
 
 import com.example.blocnotev3.Base.NotesListe;
 import com.example.blocnotev3.CreateNote;
+import com.example.blocnotev3.Note;
 import com.example.blocnotev3.R;
 import java.util.ArrayList;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
-public class AdapterListe extends ArrayAdapter<String> {
+public class AdapterListe extends ArrayAdapter<Note> {
 
 
     // Constructeur Adapter
-    public AdapterListe(Context mContext, ArrayList<String> mOriginalValues){
+    public AdapterListe(Context mContext, ArrayList<Note> mOriginalValues){
         super(mContext,R.layout.content_adapter_liste,mOriginalValues);
     }
 
@@ -44,16 +45,14 @@ public class AdapterListe extends ArrayAdapter<String> {
 
 
             }
-
-
-
-
         });
 
         // Récupérer la postiion de chaque item
-        String item = getItem(position);
+        Note currentNote = getItem(position);
 
-        titleTextView.setText(item);
+        // String uid = dataSnapshot.getKey();
+
+        titleTextView.setText(currentNote.getTitle());
 
         return convertView;
     }

@@ -4,22 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.blocnotev3.Adapter.AdapterListe;
 import com.example.blocnotev3.CreateNote;
-import com.example.blocnotev3.Helper.FileHelper;
 import com.example.blocnotev3.Helper.Helper;
-import com.example.blocnotev3.MainActivity;
+import com.example.blocnotev3.Note;
 import com.example.blocnotev3.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +33,6 @@ public class NotesListe extends AppCompatActivity {
     // Button Floating
     FloatingActionButton floatingActionButton;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +52,23 @@ public class NotesListe extends AppCompatActivity {
         chatDocumentNotes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                 // Création de l'array List qui contriendra les notes en "String"
-                ArrayList <String> noteListe = new ArrayList<>();
+                ArrayList <Note> noteListe = new ArrayList<>();
+
                 if (task.isSuccessful()) {
+
                     // Parcourir tous les documents et donner les resultats (getResult)
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String stringNote = document.getString("first");
-                        noteListe.add(stringNote);
+                    for (QueryDocumentSnapshot document : task.getResult())
+                    {
+
+                        String title = document.getString("first");
+                        String uid = document.getId();
+                        // String uid = document.getKey();
+
+                        Note note = new Note(uid, title);
+
+                        noteListe.add(note);
                     }
 
                     // Adapter

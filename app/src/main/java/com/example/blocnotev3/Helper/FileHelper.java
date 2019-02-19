@@ -1,42 +1,54 @@
 package com.example.blocnotev3.Helper;
 
+import android.content.Intent;
+
+import com.example.blocnotev3.Note;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Collections;
-import java.util.Map;
+
+import static android.app.PendingIntent.getActivity;
+import static com.example.blocnotev3.Note.uid;
 
 public class FileHelper {
 
     DatabaseReference db;
     Boolean saved=null;
+
     //ArrayList
     ArrayList<String> ArrayListNote=new ArrayList<>();
 
     public FileHelper(DatabaseReference db) {
         this.db = db;
     }
-    // Définition du nom de la collection
-    private static final String COLLECTION_NAME = "notes";
-    // Methode qui sauvergarde les données en BDD
-    public static Task<DocumentReference> saveToFirebase(String textMessage){
 
-        Map<String, Object> user = new HashMap<>();
+    // Définition du nom de la collection
+    private static final String NOTE_COLLECTION = "notes";
+
+    // Methode qui sauvergarde les données en BDD
+    public static Task<Void> saveToFirebase(Note note){
+
+        // Map<String, Object> note = new HashMap<>();
         // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
-        user.put("first", textMessage);
+        // note.put("first", textMessage);
+        // note.put("uid", uid);
+
+        Intent intent = new Intent();
+        Note noteIntent = (Note)intent.getSerializableExtra("note");
 
         return Helper.getChatCollection()
                 .document("document")
-                .collection(COLLECTION_NAME)
-                .add(user)
-                ;
+                .collection(NOTE_COLLECTION)
+                .document(uid)
+                .set(uid, SetOptions.merge());
+
+        // .add(note);
+
+        //
+                // .add(note);
     }
 
     // ------
