@@ -1,6 +1,5 @@
 package com.example.blocnotev3;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,8 +9,8 @@ public class Note {
     // Attributs |
     // ----------------
 
-    public static String uid;
-    public static String title;
+    private static String uid;
+    private static String title;
 
     public Note() {}
 
@@ -29,9 +28,7 @@ public class Note {
     // ----------------
 
     public String getUid() { return uid; }
-    public String getTitle(){
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public void setUid(String uid) { this.uid = uid; }
     public void setTitle(String title) { this.title = title; }

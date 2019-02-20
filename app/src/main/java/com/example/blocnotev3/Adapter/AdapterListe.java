@@ -21,25 +21,31 @@ public class AdapterListe extends ArrayAdapter<Note> {
 
 
     // Constructeur Adapter
-    public AdapterListe(Context mContext, ArrayList<Note> mOriginalValues){
+    // Appeler par "NoteListe" avec en paramètres le context + la liste des notes
+    public AdapterListe(Context mContext, ArrayList<Note> mOriginalValues)
+    {
         super(mContext,R.layout.content_adapter_liste,mOriginalValues);
     }
 
+    // Je défini moi meme le comportement de la methode "getView" qui appartient à "ArrayAdapter"
+    // View = paramètre de sortie
     @Override
     public View getView(final int position, View convertView, ViewGroup parent){
+        // ??
         if(convertView == null){
             convertView = ((Activity)getContext())
                     .getLayoutInflater()
                     .inflate(R.layout.content_adapter_liste,parent,false);
         }
 
-
+        // Je récupère mon objet "TextView" et je stock dans "titleTextView"
         final TextView titleTextView = convertView.findViewById(R.id.note_title);
+
         titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Récupérer la note sur laquelle on click
+                // Récupérer la note sur laquelle on click grace
                 Note currentNote = getItem(position);
                 String uid = currentNote.getUid();
                 String title = currentNote.getTitle();
@@ -49,28 +55,15 @@ public class AdapterListe extends ArrayAdapter<Note> {
                 intent.putExtra("note", title);
                 startActivity(getContext(),intent,Bundle.EMPTY);
 
-                // INTENT
-
-
             }
         });
 
         // Récupérer la postiion de chaque item
         Note currentNote = getItem(position);
 
-        // String uid = dataSnapshot.getKey();
-
+        // Je prends le text de "currentNote" et je l'affiche sur le textView de la ligne correspondante
         titleTextView.setText(currentNote.getTitle());
 
         return convertView;
     }
-/*
-    public void startActivity(Intent intent) {
-        this.startActivity(intent);
-    }
-
-    Intent intent = new Intent(getContext(), CreateNote.class);
-                startActivity(this, intent, Bundle options);
-*/
-
 }

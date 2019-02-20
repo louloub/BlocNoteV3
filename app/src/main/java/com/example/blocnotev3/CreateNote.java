@@ -16,8 +16,6 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.blocnotev3.Note.uid;
-
 public class CreateNote extends AppCompatActivity {
 
     EditText textInput;
@@ -29,7 +27,7 @@ public class CreateNote extends AppCompatActivity {
     private static final String CHAT_COLLECTION = "chats";
     private static final String DOCUMENT_NAME = "document";
     private static final String NOTE_COLLECTION = "notes";
-    private String currentUID;
+    private Note currentNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,82 +46,56 @@ public class CreateNote extends AppCompatActivity {
 
                 Map<String, Object> note = new HashMap<>();
 
-                if (currentUID == null) {
-                    saveToFirebase(note);
+                if (currentNote == null) {
+
+                    saveToFirebase(textInput.getText().toString());
                     Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
                 } else {
-                    changeToFirebase(note);
+
+                    changeToFirebase(currentNote);
                     Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        /*
-        Note note = new Note();
-        Intent intent = new Intent(this, FileHelper.class);
-        intent.putExtra("note", textInput.getText());
-        startActivity(intent);
-
-        Intent intent = new Intent();
-        Note noteIntent = (Note)intent.getSerializableExtra("note");
-        */
-
         Intent intent = getIntent();
         String title = intent.getStringExtra("note");
         String uid = intent.getStringExtra("uid");
 
-        Note note = new Note(uid, title);
+        if (title != null && uid != null)
+        {
+            Note note = new Note(uid, title);
+            this.currentNote = note;
+        }
 
-        this.currentUID = uid;
 
         textInput.setText(title);
     }
 
     // Methode qui sauvergarde les données en BDD
-    public static Task<DocumentReference> saveToFirebase(Map<String, Object> note) {
+    public static Task<DocumentReference> saveToFirebase(String noteText) {
+
         Map<String, Object> noteMap = new HashMap<>();
+        noteMap.put("first", noteText);
 
         return FirebaseFirestore.getInstance()
                 .collection(CHAT_COLLECTION)
                 .document(DOCUMENT_NAME)
                 .collection(NOTE_COLLECTION)
                 .add(noteMap);
-
-        // Map<String, Object> note = new HashMap<>();
-        // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
-        // note.put("first", textMessage);
-        // note.put("uid", uid);
     }
 
-    public static Task<Void> changeToFirebase(Map<String, Object> note) {
+    public static Task<Void> changeToFirebase(Note noteToUpdate) {
+
         Map<String, Object> noteMap = new HashMap<>();
+        noteMap.put("first", noteToUpdate.getTitle());
 
         return FirebaseFirestore.getInstance()
                 .collection(CHAT_COLLECTION)
                 .document(DOCUMENT_NAME)
                 .collection(NOTE_COLLECTION)
-                .document("uid")
+                .document(noteToUpdate.getUid())
                 .set(noteMap, SetOptions.merge());
 
-
-        // Map<String, Object> note = new HashMap<>();
-        // "first" est la clé qui permet de chercher "textMessage" dans la "HashMap"
-        // note.put("first", textMessage);
-        // note.put("uid", uid);
     }
-
-    // --------------------
-    // CHANGED CF        |
-    // --------------------
-
-    /*
-    public void changeNoteCF(String str){
-        dbcf.collection(CHAT_COLLECTION)
-                .document(DOCUMENT_NAME)
-                .collection(NOTE_COLLECTION);
-                // .document(Note.uid)
-                // .set(str, SetOptions.merge());
-
-    }
-    */
 }

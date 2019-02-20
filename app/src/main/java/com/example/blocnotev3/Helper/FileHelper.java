@@ -10,9 +10,6 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 
-import static android.app.PendingIntent.getActivity;
-import static com.example.blocnotev3.Note.uid;
-
 public class FileHelper {
 
     DatabaseReference db;
