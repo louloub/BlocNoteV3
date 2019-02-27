@@ -9,8 +9,8 @@ public class Note {
     // Attributs |
     // ----------------
 
-    private static String uid;
-    private static String title;
+    private String uid;
+    private String title;
 
     public Note() {}
 
@@ -43,5 +43,4 @@ public class Note {
         result.put("title", title);
         return result;
     }
-
 }

@@ -14,17 +14,18 @@ import com.example.blocnotev3.CreateNote;
 import com.example.blocnotev3.Note;
 import com.example.blocnotev3.R;
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
 public class AdapterListe extends ArrayAdapter<Note> {
 
-
     // Constructeur Adapter
     // Appeler par "NoteListe" avec en paramètres le context + la liste des notes
-    public AdapterListe(Context mContext, ArrayList<Note> mOriginalValues)
+    public AdapterListe(Context mContext, List<Note> notes)
     {
-        super(mContext,R.layout.content_adapter_liste,mOriginalValues);
+        // Super : en référence à la class EXTENDS : "ArrayAdapter"
+        super(mContext,R.layout.content_adapter_liste,notes);
     }
 
     // Je défini moi meme le comportement de la methode "getView" qui appartient à "ArrayAdapter"
@@ -45,7 +46,7 @@ public class AdapterListe extends ArrayAdapter<Note> {
             @Override
             public void onClick(View v) {
 
-                // Récupérer la note sur laquelle on click grace
+                // Récupérer la note sur laquelle on click
                 Note currentNote = getItem(position);
                 String uid = currentNote.getUid();
                 String title = currentNote.getTitle();
@@ -54,15 +55,20 @@ public class AdapterListe extends ArrayAdapter<Note> {
                 intent.putExtra("uid", uid);
                 intent.putExtra("note", title);
                 startActivity(getContext(),intent,Bundle.EMPTY);
-
             }
         });
 
+        Note note = getItem(position);
+        String str = note.getTitle();
+        titleTextView.setText(str);
+
         // Récupérer la postiion de chaque item
-        Note currentNote = getItem(position);
+        // Note currentNote = getItem(position);
+
+        // String noteText = currentNote.getTitle();
 
         // Je prends le text de "currentNote" et je l'affiche sur le textView de la ligne correspondante
-        titleTextView.setText(currentNote.getTitle());
+        // titleTextView.setText(noteText);
 
         return convertView;
     }

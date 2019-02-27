@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -38,9 +39,6 @@ public class NotesListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
-        // ListView
-        // listView = findViewById(R.id.listView);
-
         // ---------
         // Récupération des données dans la BDD
         // ---------
@@ -50,10 +48,12 @@ public class NotesListe extends AppCompatActivity {
         CollectionReference chatDocumentNotes = Helper.getChatDocumentNotes();
 
         chatDocumentNotes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
             @Override
+            // Override : On s'approprie la methode "onComplete" qui est étendue de "AppCompatActivity"
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                // Création de l'array List qui contriendra les notes en "String"
+                // Création de l'array List qui contriendra les notes
                 ArrayList <Note> noteListe = new ArrayList<>();
 
                 if (task.isSuccessful()) {
@@ -61,7 +61,6 @@ public class NotesListe extends AppCompatActivity {
                     // Parcourir tous les documents et donner les resultats (getResult)
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
-
                         String title = document.getString("first");
                         String uid = document.getId();
 
@@ -69,11 +68,29 @@ public class NotesListe extends AppCompatActivity {
                         noteListe.add(note);
                     }
 
-                    // Adapter
+                    //--------
+                    // ADAPTER
+                    //--------
+                    // Création de l'adapteur view (list view) avec le modele XML
                     ListView ListView = findViewById(R.id.listView);
+
+                    // Implémentation d'un nouvel adapterListe (ArrayAdapter) "mMAdapterList"
                     AdapterListe mMAdapterList = new AdapterListe(NotesListe.this, noteListe);
+
+                    // On associe l'adapter "mMAdapterList "à l'adapter view "ListView" avec "setAdapter"
                     ListView.setAdapter(mMAdapterList);
 
+                    //--------
+                    // BOUCLE
+                    //--------
+
+                    for(int i = 0; i < noteListe.size(); i++){
+
+                        //i = mMAdapterList.getItem("");
+
+                        String noteTitle = noteListe.get(i).getTitle();
+                        Log.d("TAG", "Item " + noteTitle + " " + i);
+                    }
 
                 } else {
                 }
@@ -94,24 +111,3 @@ public class NotesListe extends AppCompatActivity {
         });
     }
 }
-
-/*
-
-TEST1
-noteListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
-TEST2
-noteListe.setOnItemClickListener(new AdapterListe.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        }
-    });
-
- */
-

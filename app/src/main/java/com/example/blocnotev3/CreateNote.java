@@ -52,6 +52,8 @@ public class CreateNote extends AppCompatActivity {
                     Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
                 } else {
 
+                    String textChange = textInput.getText().toString();
+                    currentNote.setTitle(textChange);
                     changeToFirebase(currentNote);
                     Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
                 }
@@ -68,8 +70,8 @@ public class CreateNote extends AppCompatActivity {
             this.currentNote = note;
         }
 
-
         textInput.setText(title);
+
     }
 
     // Methode qui sauvergarde les données en BDD
