@@ -54,10 +54,12 @@ public class AdapterListe extends ArrayAdapter<Note> {
                 Note currentNote = getItem(position);
                 String uid = currentNote.getUid();
                 String title = currentNote.getTitle();
+                String description = currentNote.getDescription();
 
                 Intent intent = new Intent(getContext(), CreateNote.class);
                 intent.putExtra("uid", uid);
                 intent.putExtra("note", title);
+                intent.putExtra("description", description);
                 startActivity(getContext(),intent,Bundle.EMPTY);
             }
         });
