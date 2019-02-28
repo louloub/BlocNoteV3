@@ -101,7 +101,7 @@ public class CreateNote extends AppCompatActivity {
 
         Map<String, Object> noteMap = new HashMap<>();
         noteMap.put("first", noteToUpdate.getTitle());
-        // noteMap.put("description", noteDescriptionToUpdate);
+        noteMap.put("description", noteToUpdate.getDescription());
 
         return FirebaseFirestore.getInstance()
                 .collection(CHAT_COLLECTION)
