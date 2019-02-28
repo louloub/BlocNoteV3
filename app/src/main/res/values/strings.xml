@@ -46,5 +46,7 @@
     <string name="fb_login_protocol_scheme">fb2273772329533256</string>
     <string name="facebook_application_id" translatable="false">2273772329533256</string>
     <string name="facebook_login_protocol_scheme" translatable="false" tools:ignore="UnusedResources">fb2273772329533256</string>
+    <string name="description">Description</string>
+    <string name="titre">Titre</string>
 
 </resources>

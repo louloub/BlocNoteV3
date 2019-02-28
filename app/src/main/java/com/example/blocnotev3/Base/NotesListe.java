@@ -63,9 +63,10 @@ public class NotesListe extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult())
                     {
                         String title = document.getString("first");
+                        String description = document.getString("description");
                         String uid = document.getId();
 
-                        Note note = new Note(uid, title);
+                        Note note = new Note(uid, title, description );
                         noteListe.add(note);
                     }
 
@@ -90,7 +91,9 @@ public class NotesListe extends AppCompatActivity {
                         //i = mMAdapterList.getItem("");
 
                         String noteTitle = noteListe.get(i).getTitle();
-                        Log.d("TAG", "Item " + noteTitle + " " + i);
+                        String noteDescription = noteListe.get(i).getDescription();
+
+                        Log.d("TAG", "Item " + noteTitle + " " + i + " " + noteDescription);
                     }
 
                 } else {

@@ -19,6 +19,7 @@ import java.util.Map;
 public class CreateNote extends AppCompatActivity {
 
     EditText textInput;
+    EditText textInputDescription;
     Button buttonSvg;
 
     // Instance CloudFirebase
@@ -38,6 +39,7 @@ public class CreateNote extends AppCompatActivity {
 
         // Lien bouttons / code
         textInput = findViewById(R.id.editText);
+        textInputDescription = findViewById(R.id.editTextDescription);
         buttonSvg = findViewById(R.id.buttonSvg);
 
         buttonSvg.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +50,18 @@ public class CreateNote extends AppCompatActivity {
 
                 if (currentNote == null) {
 
-                    saveToFirebase(textInput.getText().toString());
+                    saveToFirebase(textInput.getText().toString(), textInputDescription.getText().toString());
                     Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
                 } else {
 
                     String textChange = textInput.getText().toString();
+                    String textChangeDescription = textInputDescription.getText().toString();
+
                     currentNote.setTitle(textChange);
+                    currentNote.setDescription(textChangeDescription);
+
                     changeToFirebase(currentNote);
+
                     Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
                 }
             }
@@ -62,23 +69,26 @@ public class CreateNote extends AppCompatActivity {
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("note");
+        String description = intent.getStringExtra("description");
         String uid = intent.getStringExtra("uid");
 
-        if (title != null && uid != null)
+        if (title != null && uid != null && description != null)
         {
-            Note note = new Note(uid, title);
+            Note note = new Note(uid, title, description);
             this.currentNote = note;
         }
 
         textInput.setText(title);
+        textInputDescription.setText(description);
 
     }
 
     // Methode qui sauvergarde les données en BDD
-    public static Task<DocumentReference> saveToFirebase(String noteText) {
+    public static Task<DocumentReference> saveToFirebase(String noteText, String noteDescription) {
 
         Map<String, Object> noteMap = new HashMap<>();
         noteMap.put("first", noteText);
+        noteMap.put("description", noteDescription);
 
         return FirebaseFirestore.getInstance()
                 .collection(CHAT_COLLECTION)
@@ -91,6 +101,7 @@ public class CreateNote extends AppCompatActivity {
 
         Map<String, Object> noteMap = new HashMap<>();
         noteMap.put("first", noteToUpdate.getTitle());
+        // noteMap.put("description", noteDescriptionToUpdate);
 
         return FirebaseFirestore.getInstance()
                 .collection(CHAT_COLLECTION)
