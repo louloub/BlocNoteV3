@@ -12,6 +12,7 @@ public class Note {
     private String uid;
     private String title;
 
+
     public Note() {}
 
     // ----------------

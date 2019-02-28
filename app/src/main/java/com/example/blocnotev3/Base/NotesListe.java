@@ -51,6 +51,7 @@ public class NotesListe extends AppCompatActivity {
 
             @Override
             // Override : On s'approprie la methode "onComplete" qui est étendue de "AppCompatActivity"
+            // onComplete : Called when the Task completes.
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                 // Création de l'array List qui contriendra les notes

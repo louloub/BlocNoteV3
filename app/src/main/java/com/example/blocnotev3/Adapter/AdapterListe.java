@@ -30,6 +30,10 @@ public class AdapterListe extends ArrayAdapter<Note> {
 
     // Je défini moi meme le comportement de la methode "getView" qui appartient à "ArrayAdapter"
     // View = paramètre de sortie
+    // "View getView" est appelé à chaque fois qu'un item est affiché à l'écran
+    // position : position de l'item dans la liste
+    // parent : layout auquel rattacher la vue
+    // convertView : l'ancienne vue à réutiliser si possible
     @Override
     public View getView(final int position, View convertView, ViewGroup parent){
         // ??
