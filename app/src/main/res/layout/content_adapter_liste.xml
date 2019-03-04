@@ -20,4 +20,13 @@
     android:textColor="@color/colorPrimary"
     android:hint="Titre de la note"/>
 
+    <TextView
+        android:id="@+id/note_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/colorPrimary"
+        android:hint="Description de la note"/>
+
 </LinearLayout>

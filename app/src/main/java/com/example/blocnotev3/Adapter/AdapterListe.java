@@ -45,6 +45,8 @@ public class AdapterListe extends ArrayAdapter<Note> {
 
         // Je récupère mon objet "TextView" et je stock dans "titleTextView"
         final TextView titleTextView = convertView.findViewById(R.id.note_title);
+        final TextView descriptionTextView = convertView.findViewById(R.id.note_description);
+
 
         titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +67,12 @@ public class AdapterListe extends ArrayAdapter<Note> {
         });
 
         Note note = getItem(position);
+
         String str = note.getTitle();
+        String desc = note.getDescription();
+
         titleTextView.setText(str);
+        descriptionTextView.setText(desc);
 
         // Récupérer la postiion de chaque item
         // Note currentNote = getItem(position);
