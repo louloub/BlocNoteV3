@@ -80,7 +80,6 @@ public class CreateNote extends AppCompatActivity {
 
         textInput.setText(title);
         textInputDescription.setText(description);
-
     }
 
     // Methode qui sauvergarde les données en BDD

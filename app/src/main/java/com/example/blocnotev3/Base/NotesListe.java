@@ -82,6 +82,8 @@ public class NotesListe extends AppCompatActivity {
                     // On associe l'adapter "mMAdapterList "à l'adapter view "ListView" avec "setAdapter"
                     ListView.setAdapter(mMAdapterList);
 
+                    mMAdapterList.notifyDataSetChanged();
+
                     //--------
                     // BOUCLE
                     //--------

@@ -47,7 +47,6 @@ public class AdapterListe extends ArrayAdapter<Note> {
         final TextView titleTextView = convertView.findViewById(R.id.note_title);
         final TextView descriptionTextView = convertView.findViewById(R.id.note_description);
 
-
         titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
