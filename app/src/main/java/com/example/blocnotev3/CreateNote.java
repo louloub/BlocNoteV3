@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.blocnotev3.Services.FirestoreNoteService;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,9 +26,6 @@ public class CreateNote extends AppCompatActivity {
     // Instance CloudFirebase
     private FirebaseFirestore dbcf;
 
-    private static final String CHAT_COLLECTION = "chats";
-    private static final String DOCUMENT_NAME = "document";
-    private static final String NOTE_COLLECTION = "notes";
     private Note currentNote;
 
     @Override
@@ -50,7 +48,7 @@ public class CreateNote extends AppCompatActivity {
 
                 if (currentNote == null) {
 
-                    saveToFirebase(textInput.getText().toString(), textInputDescription.getText().toString());
+                    FirestoreNoteService.saveToFirebase(textInput.getText().toString(), textInputDescription.getText().toString());
                     Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
                 } else {
 
@@ -60,7 +58,7 @@ public class CreateNote extends AppCompatActivity {
                     currentNote.setTitle(textChange);
                     currentNote.setDescription(textChangeDescription);
 
-                    changeToFirebase(currentNote);
+                    FirestoreNoteService.changeToFirebase(currentNote);
 
                     Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
                 }
@@ -80,34 +78,5 @@ public class CreateNote extends AppCompatActivity {
 
         textInput.setText(title);
         textInputDescription.setText(description);
-    }
-
-    // Methode qui sauvergarde les données en BDD
-    public static Task<DocumentReference> saveToFirebase(String noteText, String noteDescription) {
-
-        Map<String, Object> noteMap = new HashMap<>();
-        noteMap.put("first", noteText);
-        noteMap.put("description", noteDescription);
-
-        return FirebaseFirestore.getInstance()
-                .collection(CHAT_COLLECTION)
-                .document(DOCUMENT_NAME)
-                .collection(NOTE_COLLECTION)
-                .add(noteMap);
-    }
-
-    public static Task<Void> changeToFirebase(Note noteToUpdate) {
-
-        Map<String, Object> noteMap = new HashMap<>();
-        noteMap.put("first", noteToUpdate.getTitle());
-        noteMap.put("description", noteToUpdate.getDescription());
-
-        return FirebaseFirestore.getInstance()
-                .collection(CHAT_COLLECTION)
-                .document(DOCUMENT_NAME)
-                .collection(NOTE_COLLECTION)
-                .document(noteToUpdate.getUid())
-                .set(noteMap, SetOptions.merge());
-
     }
 }

@@ -2,34 +2,30 @@ package com.example.blocnotev3.Base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
 import com.example.blocnotev3.Adapter.AdapterListe;
 import com.example.blocnotev3.CreateNote;
-import com.example.blocnotev3.Helper.Helper;
+import com.example.blocnotev3.Listener.NotesListener;
+import com.example.blocnotev3.Manager.NotesManager;
 import com.example.blocnotev3.Note;
 import com.example.blocnotev3.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class NotesListe extends AppCompatActivity {
+public class NotesListe extends AppCompatActivity implements NotesListener {
 
     // Firabase
     private FirebaseAuth mAuth;
 
     // ListView
-    ListView listView;
+    private ListView listView;
+
+    private AdapterListe mMAdapterList;
 
     // Button Floating
     FloatingActionButton floatingActionButton;
@@ -39,69 +35,29 @@ public class NotesListe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
-        // ---------
-        // Récupération des données dans la BDD
-        // ---------
+        listView = findViewById(R.id.listView);
 
-        // Référence dans la BDD : "CollectionReference"
-        // "DocumenRefrence" pour les documents uniquement
-        CollectionReference chatDocumentNotes = Helper.getChatDocumentNotes();
+        NotesManager.get_instance().setListener(this);
+        // récupère la liste de note
+        ArrayList<Note> notes = NotesManager.get_instance().getNotes();
 
-        chatDocumentNotes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        if (notes.size() == 0) {
+            // demande au manager de lui amener la liste de note
+            NotesManager.get_instance().loadNoteList();
+        }
+        else {
+            mMAdapterList = new AdapterListe(NotesListe.this, notes);
+            listView.setAdapter(mMAdapterList);
+        }
 
-            @Override
-            // Override : On s'approprie la methode "onComplete" qui est étendue de "AppCompatActivity"
-            // onComplete : Called when the Task completes.
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                // Création de l'array List qui contriendra les notes
-                ArrayList <Note> noteListe = new ArrayList<>();
-
-                if (task.isSuccessful()) {
-
-                    // Parcourir tous les documents et donner les resultats (getResult)
-                    for (QueryDocumentSnapshot document : task.getResult())
-                    {
-                        String title = document.getString("first");
-                        String description = document.getString("description");
-                        String uid = document.getId();
-
-                        Note note = new Note(uid, title, description );
-                        noteListe.add(note);
-                    }
-
-                    //--------
-                    // ADAPTER
-                    //--------
-                    // Création de l'adapteur view (list view) avec le modele XML
-                    ListView ListView = findViewById(R.id.listView);
-
-                    // Implémentation d'un nouvel adapterListe (ArrayAdapter) "mMAdapterList"
-                    AdapterListe mMAdapterList = new AdapterListe(NotesListe.this, noteListe);
-
-                    // On associe l'adapter "mMAdapterList "à l'adapter view "ListView" avec "setAdapter"
-                    ListView.setAdapter(mMAdapterList);
-
-                    mMAdapterList.notifyDataSetChanged();
-
-                    //--------
-                    // BOUCLE
-                    //--------
-
-                    for(int i = 0; i < noteListe.size(); i++){
-
-                        //i = mMAdapterList.getItem("");
-
-                        String noteTitle = noteListe.get(i).getTitle();
-                        String noteDescription = noteListe.get(i).getDescription();
-
-                        Log.d("TAG", "Item " + noteTitle + " " + i + " " + noteDescription);
-                    }
-
-                } else {
-                }
-            }
-        });
+        //--------
+        // ADAPTER
+        //--------
+        // Création de l'adapteur view (list view) avec le modele XML
+        if(mMAdapterList != null)
+        {
+            listView.setAdapter(mMAdapterList);
+        }
 
         // ---------
         // Boutton Floating
@@ -115,5 +71,24 @@ public class NotesListe extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onNoteListLoaded() {
+
+        ArrayList<Note> notes = NotesManager.get_instance().getNotes();
+        // Implémentation d'un nouvel adapterListe (ArrayAdapter) "mMAdapterList"
+        mMAdapterList = new AdapterListe(NotesListe.this, notes);
+
+        // On associe l'adapter "mMAdapterList "à l'adapter view "ListView" avec "setAdapter"
+        listView.setAdapter(mMAdapterList);
+
+        mMAdapterList.notifyDataSetChanged();
+
     }
 }
