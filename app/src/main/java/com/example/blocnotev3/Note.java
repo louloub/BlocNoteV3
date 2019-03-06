@@ -41,9 +41,9 @@ public class Note {
     // HASHMAP        |
     // ----------------
 
-    public Map<String, Object> toMap() {
+    public HashMap<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", uid);
+        // result.put("uid", uid);
         result.put("title", title);
         result.put("description",description);
         return result;

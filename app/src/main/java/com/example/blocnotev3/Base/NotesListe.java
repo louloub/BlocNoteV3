@@ -35,6 +35,10 @@ public class NotesListe extends AppCompatActivity implements NotesListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
+        // Copie des notes de CF vers RTDB
+        // "NotesManager.get_instance()" on appel le manager
+        NotesManager.get_instance().readCFwriteRTDB();
+
         listView = findViewById(R.id.listView);
 
         NotesManager.get_instance().setListener(this);

@@ -10,9 +10,11 @@ import com.example.blocnotev3.Helper.Helper;
 import com.example.blocnotev3.Listener.NotesListener;
 import com.example.blocnotev3.Note;
 import com.example.blocnotev3.R;
+import com.example.blocnotev3.Services.DataBaseNoteService;
 import com.example.blocnotev3.Services.FirestoreNoteService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -50,11 +52,16 @@ public class NotesManager {
         FirestoreNoteService.loadNoteList();
     }
 
+    // On s'assure que la liste est bien loaded
     public void listLoaded() {
 
         if(listener != null)
         {
             listener.onNoteListLoaded();
         }
+    }
+
+    public void readCFwriteRTDB(){
+        DataBaseNoteService.readCFwriteRTDB();
     }
 }
