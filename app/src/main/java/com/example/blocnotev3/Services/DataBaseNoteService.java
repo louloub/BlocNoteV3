@@ -61,6 +61,7 @@ public class DataBaseNoteService {
                         //----------
                         // WRITE RTDB
                         //----------
+                        databaseReference.child(uid).setValue(note.toMap());
 
                         /*
                         Map<String, Object> noteHashMap = note.toMap();
@@ -69,12 +70,6 @@ public class DataBaseNoteService {
 
                         noteRef.setValue(noteHashMap);
                         */
-
-                        // databaseReference.child("notes").setValue("test1","test2");
-                        // databaseReference.child("notes").setValue(note.toMap());
-                        // databaseReference.child("notes").setValue(note);
-                        // databaseReference.child(uid).setValue(title, description);
-                        databaseReference.child(uid).setValue(note.toMap());
                     }
 
                     }

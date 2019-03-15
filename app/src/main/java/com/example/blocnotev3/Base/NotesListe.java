@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.example.blocnotev3.Adapter.AdapterListe;
 import com.example.blocnotev3.CreateNote;
-import com.example.blocnotev3.Listener.NotesListener;
+import com.example.blocnotev3.Listener.NotesManagerListener;
 import com.example.blocnotev3.Manager.NotesManager;
 import com.example.blocnotev3.Note;
 import com.example.blocnotev3.R;
@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class NotesListe extends AppCompatActivity implements NotesListener {
+public class NotesListe extends AppCompatActivity implements NotesManagerListener {
 
     // Firabase
     private FirebaseAuth mAuth;
@@ -37,7 +37,7 @@ public class NotesListe extends AppCompatActivity implements NotesListener {
 
         // Copie des notes de CF vers RTDB
         // "NotesManager.get_instance()" on appel le manager
-        NotesManager.get_instance().readCFwriteRTDB();
+        // NotesManager.get_instance().readCFwriteRTDB();
 
         listView = findViewById(R.id.listView);
 

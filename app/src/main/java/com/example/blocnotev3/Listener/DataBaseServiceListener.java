@@ -4,7 +4,6 @@ import com.example.blocnotev3.Note;
 
 import java.util.ArrayList;
 
-public interface NotesListener {
-
-    void onNoteListLoaded();
+public interface DataBaseServiceListener {
+    void onNoteListeLoadedFromRTDB(ArrayList<Note> loadedNotes);
 }

@@ -1,32 +1,25 @@
 package com.example.blocnotev3.Manager;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.ListView;
-
-import com.example.blocnotev3.Adapter.AdapterListe;
-import com.example.blocnotev3.Base.NotesListe;
-import com.example.blocnotev3.Helper.Helper;
-import com.example.blocnotev3.Listener.NotesListener;
+import com.example.blocnotev3.Listener.CloudFirestoreServiceListener;
+import com.example.blocnotev3.Listener.DataBaseServiceListener;
+import com.example.blocnotev3.Listener.NotesManagerListener;
 import com.example.blocnotev3.Note;
-import com.example.blocnotev3.R;
 import com.example.blocnotev3.Services.DataBaseNoteService;
 import com.example.blocnotev3.Services.FirestoreNoteService;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.ArrayList;
 
-public class NotesManager {
+public class NotesManager implements DataBaseServiceListener, CloudFirestoreServiceListener {
 
     private static NotesManager _instance;
     private ArrayList<Note> notes = new ArrayList<>();
 
-    private NotesListener listener;
+    // Déclaration du "listener" de "NotesManagerListener"
+    private NotesManagerListener listener;
+
+    // Test Listener
+    private CloudFirestoreServiceListener listenerCF;
 
     public synchronized static NotesManager get_instance() {
         if (_instance == null) {
@@ -43,16 +36,28 @@ public class NotesManager {
         return notes;
     }
 
-    public void setListener(NotesListener listener) {
+    public void setListener(NotesManagerListener listener) {
         this.listener = listener;
     }
+
+    //---------
+    // READ
+    //---------
+
+    public void readCFwriteRTDB(){
+        DataBaseNoteService.readCFwriteRTDB();
+    }
+
+    //---------
+    // LOAD
+    //---------
 
     public void loadNoteList() {
 
         FirestoreNoteService.loadNoteList();
     }
 
-    // On s'assure que la liste est bien loaded
+    // On s'assure que la liste est bien loaded avec un LISTENER
     public void listLoaded() {
 
         if(listener != null)
@@ -61,7 +66,22 @@ public class NotesManager {
         }
     }
 
-    public void readCFwriteRTDB(){
-        DataBaseNoteService.readCFwriteRTDB();
+    //---------
+    // LOAD CF
+    //---------
+
+    @Override
+    public void onNoteListeLoadedFromCF(ArrayList<Note> loadedNotesCF) {
+        this.notes = loadedNotesCF;
+        // listenerCF.onNoteListeLoadedFromCF(loadedNotesCF);
+    }
+
+    //---------
+    // LOAD RTDB
+    //---------
+
+    @Override
+    public void onNoteListeLoadedFromRTDB(ArrayList<Note> loadedNotesRTDB) {
+        this.notes = loadedNotesRTDB;
     }
 }
