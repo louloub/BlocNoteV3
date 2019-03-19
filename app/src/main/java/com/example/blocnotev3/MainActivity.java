@@ -1,29 +1,22 @@
 package com.example.blocnotev3;
 
-import android.content.ContentProvider;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.TextView;
 
 
-import com.example.blocnotev3.Auth.ProfilActivity;
 import com.example.blocnotev3.Base.NotesListe;
-import com.example.blocnotev3.Helper.FileHelper;
 import com.example.blocnotev3.Helper.Helper;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

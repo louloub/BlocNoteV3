@@ -18,9 +18,6 @@ public class NotesManager implements DataBaseServiceListener, CloudFirestoreServ
     // Déclaration du "listener" de "NotesManagerListener"
     private NotesManagerListener listener;
 
-    // Test Listener
-    private CloudFirestoreServiceListener listenerCF;
-
     public synchronized static NotesManager get_instance() {
         if (_instance == null) {
             _instance = new NotesManager();
@@ -28,8 +25,11 @@ public class NotesManager implements DataBaseServiceListener, CloudFirestoreServ
         return _instance;
     }
 
+    // Constructeur du manager
     private NotesManager() {
-        //
+        // définir les listener
+        FirestoreNoteService.setListenerCF(this);
+        DataBaseNoteService.setListenerRTDB(this);
     }
 
     public ArrayList<Note> getNotes() {
@@ -74,6 +74,11 @@ public class NotesManager implements DataBaseServiceListener, CloudFirestoreServ
     public void onNoteListeLoadedFromCF(ArrayList<Note> loadedNotesCF) {
         this.notes = loadedNotesCF;
         // listenerCF.onNoteListeLoadedFromCF(loadedNotesCF);
+    }
+
+    @Override
+    public void onNoteListNotFoundInCF() {
+        DataBaseNoteService.readNoteRTDB();
     }
 
     //---------

@@ -57,6 +57,7 @@ public class NotesListe extends AppCompatActivity implements NotesManagerListene
         //--------
         // ADAPTER
         //--------
+
         // Création de l'adapteur view (list view) avec le modele XML
         if(mMAdapterList != null)
         {

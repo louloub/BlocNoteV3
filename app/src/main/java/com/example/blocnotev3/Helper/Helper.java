@@ -31,6 +31,11 @@ public class Helper implements View.OnClickListener{
                 .collection(NOTE_COLLECTION);
     }
 
+    public static CollectionReference getNotes (){
+        return FirebaseFirestore.getInstance()
+                .collection(NOTE_COLLECTION);
+    }
+
     // --- CREATE ---
     public static Task<Void> createUser(String uid, String username, String urlPicture) {
         User userToCreate = new User(uid, username, urlPicture);
