@@ -88,5 +88,6 @@ public class NotesManager implements DataBaseServiceListener, CloudFirestoreServ
     @Override
     public void onNoteListeLoadedFromRTDB(ArrayList<Note> loadedNotesRTDB) {
         this.notes = loadedNotesRTDB;
+        FirestoreNoteService.writeNoteList(loadedNotesRTDB);
     }
 }

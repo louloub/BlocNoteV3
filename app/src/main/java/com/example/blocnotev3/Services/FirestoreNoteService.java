@@ -71,9 +71,6 @@ public class FirestoreNoteService {
             // onComplete : Called when the Task completes.
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                // (0 < QuerySnapshot.size())
-
-
                     if (task.isSuccessful()) {
 
                         if (task.getResult().size() >0){
@@ -97,7 +94,8 @@ public class FirestoreNoteService {
 
                         listenerCF.onNoteListeLoadedFromCF(listNote);
 
-                    } else { listenerCF.onNoteListNotFoundInCF();
+                    } else {
+                            listenerCF.onNoteListNotFoundInCF();
 
                     }
                 }

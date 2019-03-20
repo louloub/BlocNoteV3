@@ -97,8 +97,6 @@ public class DataBaseNoteService {
         });
     }
 
-
-
     public static void readNoteRTDB() {
 
         ValueEventListener noteListListener = new ValueEventListener() {
@@ -123,6 +121,8 @@ public class DataBaseNoteService {
                     }
 
                     listenerRTDB.onNoteListeLoadedFromRTDB(listNote);
+
+
                 }
                 else
                 {
@@ -139,6 +139,7 @@ public class DataBaseNoteService {
         };
 
         databaseReference.addValueEventListener(noteListListener);
-
     }
+
+
 }
