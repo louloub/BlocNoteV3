@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -70,30 +71,35 @@ public class FirestoreNoteService {
             // onComplete : Called when the Task completes.
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                if (task.isSuccessful()) {
+                // (0 < QuerySnapshot.size())
 
-                    ArrayList<Note> listNote = new ArrayList<>();
 
-                    // Parcourir tous les documents et donner les resultats (getResult)
-                    for (QueryDocumentSnapshot document : task.getResult())
-                    {
-                        String title = document.getString("first");
-                        String description = document.getString("description");
-                        String uid = document.getId();
+                    if (task.isSuccessful()) {
 
-                        Note note = new Note(uid, title, description );
+                        if (task.getResult().size() >0){
 
-                        listNote.add(note);
+                        ArrayList<Note> listNote = new ArrayList<>();
 
-                        // On appelle le singleton en utilisant le "get instance"
-                        // NotesManager.get_instance().getNotes().add(note);
+                        // Parcourir tous les documents et donner les resultats (getResult)
+                        for (QueryDocumentSnapshot document : task.getResult())
+                        {
+                            String title = document.getString("first");
+                            String description = document.getString("description");
+                            String uid = document.getId();
+
+                            Note note = new Note(uid, title, description );
+
+                            listNote.add(note);
+
+                            // On appelle le singleton en utilisant le "get instance"
+                            // NotesManager.get_instance().getNotes().add(note);
+                        }
+
+                        listenerCF.onNoteListeLoadedFromCF(listNote);
+
+                    } else { listenerCF.onNoteListNotFoundInCF();
+
                     }
-
-                    listenerCF.onNoteListeLoadedFromCF(listNote);
-
-                } else {
-
-                    listenerCF.onNoteListNotFoundInCF();
                 }
             }
         });
