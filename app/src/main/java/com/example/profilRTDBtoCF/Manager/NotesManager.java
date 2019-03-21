@@ -1,11 +1,11 @@
-package com.example.blocnotev3.Manager;
+package com.example.profilRTDBtoCF.Manager;
 
-import com.example.blocnotev3.Listener.CloudFirestoreServiceListener;
-import com.example.blocnotev3.Listener.DataBaseServiceListener;
-import com.example.blocnotev3.Listener.NotesManagerListener;
-import com.example.blocnotev3.Note;
-import com.example.blocnotev3.Services.DataBaseNoteService;
-import com.example.blocnotev3.Services.FirestoreNoteService;
+import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
+import com.example.profilRTDBtoCF.Listener.DataBaseServiceListener;
+import com.example.profilRTDBtoCF.Listener.NotesManagerListener;
+import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.Services.DataBaseNoteService;
+import com.example.profilRTDBtoCF.Services.FirestoreNoteService;
 
 
 import java.util.ArrayList;

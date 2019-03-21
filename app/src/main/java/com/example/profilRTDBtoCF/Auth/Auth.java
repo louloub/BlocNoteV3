@@ -1,6 +1,4 @@
-package com.example.blocnotev3.Auth;
-
-import android.content.Intent;
+package com.example.profilRTDBtoCF.Auth;
 
 import com.firebase.ui.auth.AuthUI;
 

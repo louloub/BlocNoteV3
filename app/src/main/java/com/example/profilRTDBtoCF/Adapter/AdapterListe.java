@@ -1,4 +1,4 @@
-package com.example.blocnotev3.Adapter;
+package com.example.profilRTDBtoCF.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.blocnotev3.Base.NotesListe;
-import com.example.blocnotev3.CreateNote;
-import com.example.blocnotev3.Note;
-import com.example.blocnotev3.R;
-import java.util.ArrayList;
+import com.example.profilRTDBtoCF.CreateNote;
+import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.R;
+
 import java.util.List;
 
 import static android.support.v4.content.ContextCompat.startActivity;

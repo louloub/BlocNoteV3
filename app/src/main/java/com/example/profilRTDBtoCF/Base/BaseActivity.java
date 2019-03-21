@@ -1,4 +1,4 @@
-package com.example.blocnotev3.Base;
+package com.example.profilRTDBtoCF.Base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 
-import com.example.blocnotev3.R;
+import com.example.profilRTDBtoCF.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

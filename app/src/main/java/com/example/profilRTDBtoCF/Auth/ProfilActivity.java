@@ -1,13 +1,11 @@
-package com.example.blocnotev3.Auth;
+package com.example.profilRTDBtoCF.Auth;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,16 +13,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.example.blocnotev3.R;
-import com.example.blocnotev3.Helper.Helper;
-import com.example.blocnotev3.Base.BaseActivity;
+import com.example.profilRTDBtoCF.R;
+import com.example.profilRTDBtoCF.Helper.Helper;
+import com.example.profilRTDBtoCF.Base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.http.DELETE;
 
 public class ProfilActivity extends BaseActivity {
 

@@ -1,10 +1,8 @@
-package com.example.blocnotev3.Helper;
+package com.example.profilRTDBtoCF.Helper;
 
 import android.view.View;
-import android.widget.Button;
 
-import com.example.blocnotev3.R;
-import com.example.blocnotev3.User;
+import com.example.profilRTDBtoCF.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;

@@ -1,12 +1,11 @@
-package com.example.blocnotev3.Services;
+package com.example.profilRTDBtoCF.Services;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.blocnotev3.Helper.Helper;
-import com.example.blocnotev3.Listener.DataBaseServiceListener;
-import com.example.blocnotev3.Manager.NotesManager;
-import com.example.blocnotev3.Note;
+import com.example.profilRTDBtoCF.Helper.Helper;
+import com.example.profilRTDBtoCF.Listener.DataBaseServiceListener;
+import com.example.profilRTDBtoCF.Note;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -15,13 +14,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 

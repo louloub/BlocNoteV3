@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">BlocNoteV3</string>
+    <string name="app_name">profilRTDBtoCF</string>
     <string name="sauvegarder">Sauvegarder</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="main_activity_description">Notre BlocNote V3 du futur !</string>

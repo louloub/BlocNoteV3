@@ -1,16 +1,13 @@
-package com.example.blocnotev3.Services;
+package com.example.profilRTDBtoCF.Services;
 
 import android.support.annotation.NonNull;
 
-import com.example.blocnotev3.Helper.Helper;
-import com.example.blocnotev3.Listener.CloudFirestoreServiceListener;
-import com.example.blocnotev3.Manager.NotesManager;
-import com.example.blocnotev3.Note;
+import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
+import com.example.profilRTDBtoCF.Note;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;

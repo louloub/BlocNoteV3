@@ -1,4 +1,4 @@
-package com.example.blocnotev3.Base;
+package com.example.profilRTDBtoCF.Base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.blocnotev3.Adapter.AdapterListe;
-import com.example.blocnotev3.CreateNote;
-import com.example.blocnotev3.Listener.NotesManagerListener;
-import com.example.blocnotev3.Manager.NotesManager;
-import com.example.blocnotev3.Note;
-import com.example.blocnotev3.R;
+import com.example.profilRTDBtoCF.Adapter.AdapterListe;
+import com.example.profilRTDBtoCF.CreateNote;
+import com.example.profilRTDBtoCF.Listener.NotesManagerListener;
+import com.example.profilRTDBtoCF.Manager.NotesManager;
+import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;

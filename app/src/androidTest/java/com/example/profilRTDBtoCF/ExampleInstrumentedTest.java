@@ -1,4 +1,4 @@
-package com.example.blocnotev3;
+package com.example.profilRTDBtoCF;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

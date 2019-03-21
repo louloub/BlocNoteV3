@@ -1,4 +1,4 @@
-package com.example.blocnotev3;
+package com.example.profilRTDBtoCF;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,9 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-
-import com.example.blocnotev3.Base.NotesListe;
-import com.example.blocnotev3.Helper.Helper;
+import com.example.profilRTDBtoCF.Base.NotesListe;
+import com.example.profilRTDBtoCF.Helper.Helper;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
