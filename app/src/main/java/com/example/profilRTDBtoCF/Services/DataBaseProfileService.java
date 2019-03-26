@@ -31,6 +31,8 @@ public class DataBaseProfileService {
     private static final String DOCUMENT_NAME = "document";
     private static final String NOTE_COLLECTION = "notes";
 
+    // public static String userId = "10213328234656981";
+
     public static  DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
     private static DataBaseServiceListener listenerRTDB;
@@ -115,38 +117,42 @@ public class DataBaseProfileService {
         });
     }
 
-    public static void readProfileRTDB() {
+    public static void readProfileRTDB(final String userId) {
 
-        ValueEventListener noteListListener = new ValueEventListener() {
+        Log.w(TAG, "readProfilRTDB");
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(userId);
+
+        ValueEventListener profileListener = new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists())
-                {
                     ArrayList<Profile> listProfile = new ArrayList<>();
 
-                    // parcourir les snapshot des notes
-                    for(DataSnapshot noteSnap : dataSnapshot.getChildren()) {
+                    Iterable<DataSnapshot> profileSnap = dataSnapshot.getChildren(); {
 
-                        String identifier = noteSnap.getKey();
-                        Integer age = noteSnap.child("age").getValue(Integer.class);
-                        String bio = noteSnap.child("bio").getValue(String.class);
+                        // String identifier = profileSnap.getKey();
 
-                        Date birthday = noteSnap.child("birthday").getValue(Date.class);
-                        Date creationDate = noteSnap.child("creationDate").getValue(Date.class);
-                        String currentAppVersion = noteSnap.child("currentAppVersion").getValue(String.class);
-                        String email = noteSnap.child("email").getValue(String.class);
-                        String employer = noteSnap.child("employer").getValue(String.class);
-                        String fullName = noteSnap.child("fullName").getValue(String.class);
-                        String instanceID = noteSnap.child("instanceID").getValue(String.class);
-                        Date lastConnectionTime = noteSnap.child("lastConnectionTime").getValue(Date.class);
-                        String nickname = noteSnap.child("nickname").getValue(String.class);
-                        String oS = noteSnap.child("oS").getValue(String.class);
-                        Gender gender = noteSnap.child("Gender").getValue(Gender.class);
-                        ProfileStatus status = noteSnap.child("status").getValue(ProfileStatus.class);
-                        String ville = noteSnap.child("ville").getValue(String.class);
-                        int secretCode = noteSnap.child("secretCode").getValue(Integer.class);
-                        int difficulty = noteSnap.child("difficulty").getValue(Integer.class);
+                        Integer age = profileSnap.child("age").getValue(Integer.class);
+                        String bio = profileSnap.child("bio").getValue(String.class);
+
+                        Date birthday = profileSnap.child("birthday").getValue(Date.class);
+
+                        Date creationDate = profileSnap.child("creationDate").getValue(Date.class);
+                        String currentAppVersion = profileSnap.child("currentAppVersion").getValue(String.class);
+                        String email = profileSnap.child("email").getValue(String.class);
+                        String employer = profileSnap.child("employer").getValue(String.class);
+                        String fullName = profileSnap.child("fullName").getValue(String.class);
+                        String instanceID = profileSnap.child("instanceID").getValue(String.class);
+                        Date lastConnectionTime = profileSnap.child("lastConnectionTime").getValue(Date.class);
+                        String nickname = profileSnap.child("nickname").getValue(String.class);
+                        String oS = profileSnap.child("oS").getValue(String.class);
+                        Gender gender = profileSnap.child("Gender").getValue(Gender.class);
+                        ProfileStatus status = profileSnap.child("status").getValue(ProfileStatus.class);
+                        String ville = profileSnap.child("ville").getValue(String.class);
+                        int secretCode = profileSnap.child("secretCode").getValue(Integer.class);
+                        int difficulty = profileSnap.child("difficulty").getValue(Integer.class);
 
                         Profile profile = new Profile(age,bio,birthday,creationDate,currentAppVersion,
                                 email,employer,fullName,instanceID,lastConnectionTime,
@@ -156,12 +162,6 @@ public class DataBaseProfileService {
                     }
 
                     listenerRTDB.onProfileLoadedFromRTDB(listProfile);
-
-                }
-                else
-                {
-
-                }
             }
 
             @Override
@@ -172,7 +172,7 @@ public class DataBaseProfileService {
             }
         };
 
-        databaseReference.addValueEventListener(noteListListener);
+        databaseReference.addValueEventListener(profileListener);
     }
 
 

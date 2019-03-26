@@ -61,7 +61,6 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     //---------
 
     public void loadProfile() {
-
         FirestoreProfileService.loadProfileCF(userId);
     }
 
@@ -86,7 +85,7 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
 
     @Override
     public void onProfileNotFoundInCF() {
-        DataBaseProfileService.readProfileRTDB();
+        DataBaseProfileService.readProfileRTDB(userId);
     }
 
     //---------

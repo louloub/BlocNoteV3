@@ -138,10 +138,13 @@ public class FirestoreProfileService {
 
                             listenerCF.onProfilesLoadedFromCF(listProfile);
                         }
-                    } else {
-                            Log.w(TAG, "else loadProfilCF");
 
+                        else {
+                            Log.w(TAG, "else loadProfilCF");
                             listenerCF.onProfileNotFoundInCF();
+                            Log.w(TAG, "else loadProfilCF after listener");
+
+                        }
                     }
                 }
 
