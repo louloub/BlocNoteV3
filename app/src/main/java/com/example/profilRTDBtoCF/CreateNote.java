@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.profilRTDBtoCF.Services.FirestoreNoteService;
+import com.example.profilRTDBtoCF.Services.FirestoreProfileService;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class CreateNote extends AppCompatActivity {
     // Instance CloudFirebase
     private FirebaseFirestore dbcf;
 
-    private Note currentNote;
+    private Profile currentProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +43,23 @@ public class CreateNote extends AppCompatActivity {
 
                 Map<String, Object> note = new HashMap<>();
 
-                if (currentNote == null) {
+                if (currentProfile == null) {
 
-                    FirestoreNoteService.saveToFirebase(textInput.getText().toString(), textInputDescription.getText().toString());
+                    FirestoreProfileService.saveToFirebase(textInput.getText().toString(), textInputDescription.getText().toString());
                     Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
                 } else {
 
+                    /*
                     String textChange = textInput.getText().toString();
                     String textChangeDescription = textInputDescription.getText().toString();
 
-                    currentNote.setTitle(textChange);
-                    currentNote.setDescription(textChangeDescription);
+                    currentProfile.setTitle(textChange);
+                    currentProfile.setDescription(textChangeDescription);
 
-                    FirestoreNoteService.changeToFirebase(currentNote);
+                    FirestoreProfileService.changeToFirebase(currentProfile);
 
                     Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
+                */
                 }
             }
         });
@@ -69,8 +71,8 @@ public class CreateNote extends AppCompatActivity {
 
         if (title != null && uid != null && description != null)
         {
-            Note note = new Note(uid, title, description);
-            this.currentNote = note;
+            // Profile profile = new Profile(uid, title, description);
+            // this.currentProfile = profile;
         }
 
         textInput.setText(title);

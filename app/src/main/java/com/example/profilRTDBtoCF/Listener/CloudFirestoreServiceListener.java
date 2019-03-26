@@ -1,11 +1,11 @@
 package com.example.profilRTDBtoCF.Listener;
 
-import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.Profile;
 
 import java.util.ArrayList;
 
 public interface CloudFirestoreServiceListener {
-    void onNoteListeLoadedFromCF(ArrayList<Note> loadedNotesCF);
-    void onNoteListNotFoundInCF();
+    void onProfilesLoadedFromCF(ArrayList<Profile> loadedNotesCF);
+    void onProfileNotFoundInCF();
 }
 

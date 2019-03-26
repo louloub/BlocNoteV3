@@ -1,6 +1,6 @@
 package com.example.profilRTDBtoCF;
 
-enum ProfileStatus {
+public enum ProfileStatus {
     // The user has created its account and is waiting for approval by an admin
     SUBMITTED("submitted"),
     // The user has been approved by an admin and can use its account

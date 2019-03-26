@@ -10,21 +10,21 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.profilRTDBtoCF.CreateNote;
-import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.R;
 
 import java.util.List;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
-public class AdapterListe extends ArrayAdapter<Note> {
+public class AdapterListe extends ArrayAdapter<Profile> {
 
     // Constructeur Adapter
-    // Appeler par "NoteListe" avec en paramètres le context + la liste des notes
-    public AdapterListe(Context mContext, List<Note> notes)
+    // Appeler par "NoteListe" avec en paramètres le context + la liste des profiles
+    public AdapterListe(Context mContext, List<Profile> profiles)
     {
         // Super : en référence à la class EXTENDS : "ArrayAdapter"
-        super(mContext,R.layout.content_adapter_liste,notes);
+        super(mContext,R.layout.content_adapter_liste, profiles);
     }
 
     // Je défini moi meme le comportement de la methode "getView" qui appartient à "ArrayAdapter"
@@ -50,30 +50,36 @@ public class AdapterListe extends ArrayAdapter<Note> {
             @Override
             public void onClick(View v) {
 
-                // Récupérer la note sur laquelle on click
-                Note currentNote = getItem(position);
-                String uid = currentNote.getUid();
-                String title = currentNote.getTitle();
-                String description = currentNote.getDescription();
+                // Récupérer la profile sur laquelle on click
+                /*
+                Profile currentProfile = getItem(position);
+                String uid = currentProfile.getUid();
+                String title = currentProfile.getTitle();
+                String description = currentProfile.getDescription();
 
                 Intent intent = new Intent(getContext(), CreateNote.class);
                 intent.putExtra("uid", uid);
-                intent.putExtra("note", title);
+                intent.putExtra("profile", title);
                 intent.putExtra("description", description);
                 startActivity(getContext(),intent,Bundle.EMPTY);
+                */
             }
         });
 
-        Note note = getItem(position);
+        /*
 
-        String str = note.getTitle();
-        String desc = note.getDescription();
+        Profile profile = getItem(position);
+
+        String str = profile.getTitle();
+        String desc = profile.getDescription();
 
         titleTextView.setText(str);
         descriptionTextView.setText(desc);
 
+        */
+
         // Récupérer la postiion de chaque item
-        // Note currentNote = getItem(position);
+        // Profile currentNote = getItem(position);
 
         // String noteText = currentNote.getTitle();
 

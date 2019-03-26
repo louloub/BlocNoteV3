@@ -1,6 +1,6 @@
 package com.example.profilRTDBtoCF;
 
-enum Gender {
+public enum Gender {
     HOMME("Homme"),
     FEMME("Femme");
 

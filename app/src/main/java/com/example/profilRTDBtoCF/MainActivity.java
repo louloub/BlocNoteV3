@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.profilRTDBtoCF.Base.NotesListe;
+import com.example.profilRTDBtoCF.Base.ProfilesListe;
 import com.example.profilRTDBtoCF.Helper.Helper;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Launching "NotesListeActivity"
             private void startNotesListeActivity() {
-                Intent intent = new Intent(MainActivity.this, NotesListe.class);
+                Intent intent = new Intent(MainActivity.this, ProfilesListe.class);
                 startActivity(intent);
             }
         });

@@ -1,9 +1,9 @@
 package com.example.profilRTDBtoCF.Listener;
 
-import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.Profile;
 
 import java.util.ArrayList;
 
 public interface DataBaseServiceListener {
-    void onNoteListeLoadedFromRTDB(ArrayList<Note> loadedNotes);
+    void onProfileLoadedFromRTDB(ArrayList<Profile> loadedProfiles);
 }

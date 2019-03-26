@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".CreateNote"></activity>
-        <activity android:name=".Base.NotesListe" />
+        <activity android:name=".Base.ProfilesListe" />
         <activity android:name=".Auth.ProfilActivity" />
         <activity android:name=".MainActivity">
 

@@ -5,7 +5,7 @@ import android.os.Parcel;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Note {
+public class Profile {
 
     // ----------------
     // Attributs |
@@ -36,7 +36,7 @@ public class Note {
     // Constructeur |
     // ----------------
 
-    public Profile (String identifier, Integer age, String bio, Date birthday,
+    public Profile (Integer age, String bio, Date birthday,
                    Date creationTime, String currentAppVersion,
                    String email, String employer, String fullName, String instanceID,
                     Date lastConnectionTime, String nickname, String oS, Gender gender,
@@ -60,7 +60,6 @@ public class Note {
         this.ville = ville;
         this.secretCode = secretCode;
         this.difficulty = difficulty;
-
     }
 
     // ----------------

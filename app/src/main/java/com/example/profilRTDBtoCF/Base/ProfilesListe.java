@@ -9,15 +9,15 @@ import android.widget.ListView;
 
 import com.example.profilRTDBtoCF.Adapter.AdapterListe;
 import com.example.profilRTDBtoCF.CreateNote;
-import com.example.profilRTDBtoCF.Listener.NotesManagerListener;
-import com.example.profilRTDBtoCF.Manager.NotesManager;
-import com.example.profilRTDBtoCF.Note;
+import com.example.profilRTDBtoCF.Listener.ProfilesManagerListener;
+import com.example.profilRTDBtoCF.Manager.ProfileManager;
+import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class NotesListe extends AppCompatActivity implements NotesManagerListener {
+public class ProfilesListe extends AppCompatActivity implements ProfilesManagerListener {
 
     // Firabase
     private FirebaseAuth mAuth;
@@ -35,22 +35,22 @@ public class NotesListe extends AppCompatActivity implements NotesManagerListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_liste);
 
-        // Copie des notes de CF vers RTDB
-        // "NotesManager.get_instance()" on appel le manager
-        // NotesManager.get_instance().readCFwriteRTDB();
+        // Copie des profiles de CF vers RTDB
+        // "ProfileManager.get_instance()" on appel le manager
+        // ProfileManager.get_instance().readCFwriteRTDB();
 
         listView = findViewById(R.id.listView);
 
-        NotesManager.get_instance().setListener(this);
-        // récupère la liste de note
-        ArrayList<Note> notes = NotesManager.get_instance().getNotes();
+        ProfileManager.get_instance().setListener(this);
+        // récupère la liste
+        ArrayList<Profile> profiles = ProfileManager.get_instance().getProfiles();
 
-        if (notes.size() == 0) {
+        if (profiles.size() == 0) {
             // demande au manager de lui amener la liste de note
-            NotesManager.get_instance().loadNoteList();
+            ProfileManager.get_instance().loadProfile();
         }
         else {
-            mMAdapterList = new AdapterListe(NotesListe.this, notes);
+            mMAdapterList = new AdapterListe(ProfilesListe.this, profiles);
             listView.setAdapter(mMAdapterList);
         }
 
@@ -72,7 +72,7 @@ public class NotesListe extends AppCompatActivity implements NotesManagerListene
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NotesListe.this, CreateNote.class);
+                Intent intent = new Intent(ProfilesListe.this, CreateNote.class);
                 startActivity(intent);
             }
         });
@@ -84,11 +84,11 @@ public class NotesListe extends AppCompatActivity implements NotesManagerListene
     }
 
     @Override
-    public void onNoteListLoaded() {
+    public void onProfileListLoaded() {
 
-        ArrayList<Note> notes = NotesManager.get_instance().getNotes();
+        ArrayList<Profile> profiles = ProfileManager.get_instance().getProfiles();
         // Implémentation d'un nouvel adapterListe (ArrayAdapter) "mMAdapterList"
-        mMAdapterList = new AdapterListe(NotesListe.this, notes);
+        mMAdapterList = new AdapterListe(ProfilesListe.this, profiles);
 
         // On associe l'adapter "mMAdapterList "à l'adapter view "ListView" avec "setAdapter"
         listView.setAdapter(mMAdapterList);
