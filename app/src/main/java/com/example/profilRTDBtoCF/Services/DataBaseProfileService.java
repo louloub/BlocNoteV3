@@ -19,9 +19,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 
@@ -114,12 +116,26 @@ public class DataBaseProfileService {
         });
     }
 
+    private static TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
+
+    public static String convertDateToString(Date date){
+        simpleDateFormat.setTimeZone(utcTimeZone);
+        String formattedCurrentDate = simpleDateFormat.format(date);
+        return formattedCurrentDate;
+    }
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss +0000");
+
+    public static Date convertStringToDate(String dateAsString) throws ParseException {
+        Date date;
+        simpleDateFormat.setTimeZone(utcTimeZone);
+        date = simpleDateFormat.parse(dateAsString);
+
+        return date;
+    }
+
     public static void readProfileRTDB() {
         Log.d(TAG, "test start readProfileRTDB");
-
-        // -----------
-        // copié collé début
-        // -----------
 
         ValueEventListener profileListener = new ValueEventListener() {
             @Override
@@ -130,14 +146,26 @@ public class DataBaseProfileService {
                 {
                     Log.d(TAG, "test if onDataChange readProfileRTDB");
 
-                    Log.d(TAG, "test for onDataChange readProfileRTDB");
-
                     Integer age = profileSnap.child("age").getValue(Integer.class);
                     String bio = profileSnap.child("bio").getValue(String.class);
 
-                    Date birthday = profileSnap.child("birthday").getValue(Date.class);
+                    String birthdayString = profileSnap.child("birthday").getValue(String.class);
+                    Date birthday = null;
+                    try {
+                        birthday = convertStringToDate(birthdayString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
-                    Date creationDate = profileSnap.child("creationDate").getValue(Date.class);
+                    String creationDateString = profileSnap.child("creationDate").getValue(String.class);
+                    Date creationDate = null;
+                    try {
+                        creationDate = convertStringToDate(creationDateString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
                     String currentAppVersion = profileSnap.child("currentAppVersion").getValue(String.class);
                     String email = profileSnap.child("email").getValue(String.class);
                     String employer = profileSnap.child("employer").getValue(String.class);
@@ -171,56 +199,5 @@ public class DataBaseProfileService {
 
         // ajout du listener (profileListener) sur notre référence (databaseReference) avec "addValueEventListener"
         databaseReference.addValueEventListener(profileListener);
-
-        // -----------
-        // copié collé fin
-        // -----------
-
-
-        /*
-
-        DataSnapshot profileSnap = dataSnapshot.getChildren()) {
-
-            // String identifier = profileSnap.getKey();
-
-            Integer age = profileSnap.child("age").getValue(Integer.class);
-            String bio = profileSnap.child("bio").getValue(String.class);
-
-            Date birthday = profileSnap.child("birthday").getValue(Date.class);
-
-            Date creationDate = profileSnap.child("creationDate").getValue(Date.class);
-            String currentAppVersion = profileSnap.child("currentAppVersion").getValue(String.class);
-            String email = profileSnap.child("email").getValue(String.class);
-            String employer = profileSnap.child("employer").getValue(String.class);
-            String fullName = profileSnap.child("fullName").getValue(String.class);
-            String instanceID = profileSnap.child("instanceID").getValue(String.class);
-            Date lastConnectionTime = profileSnap.child("lastConnectionTime").getValue(Date.class);
-            String nickname = profileSnap.child("nickname").getValue(String.class);
-            String oS = profileSnap.child("oS").getValue(String.class);
-            Gender gender = profileSnap.child("Gender").getValue(Gender.class);
-            ProfileStatus status = profileSnap.child("status").getValue(ProfileStatus.class);
-            String ville = profileSnap.child("ville").getValue(String.class);
-            int secretCode = profileSnap.child("secretCode").getValue(Integer.class);
-            int difficulty = profileSnap.child("difficulty").getValue(Integer.class);
-
-            Profile profile = new Profile(age, bio, birthday, creationDate, currentAppVersion,
-                    email, employer, fullName, instanceID, lastConnectionTime,
-                    nickname, oS, gender, status, ville, secretCode, difficulty);
-
-            listProfile.add(profile);
             }
-
-            */
-
-        // Log.d(TAG, "test readProfileRTDB DataBaseProfileService ");
-
-        /*
-
-            listenerRTDB.onProfileLoadedFromRTDB(listProfile);
-          */
-
-            }
-
-
-
     }
