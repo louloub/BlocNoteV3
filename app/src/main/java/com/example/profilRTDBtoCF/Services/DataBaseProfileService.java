@@ -116,6 +116,10 @@ public class DataBaseProfileService {
         });
     }
 
+    //------------------------------------------------
+    // Date To String et inversement + méthode liées
+    //------------------------------------------------
+
     private static TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
 
     public static String convertDateToString(Date date){
@@ -124,8 +128,6 @@ public class DataBaseProfileService {
         return formattedCurrentDate;
     }
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss +0000");
-
     public static Date convertStringToDate(String dateAsString) throws ParseException {
         Date date;
         simpleDateFormat.setTimeZone(utcTimeZone);
@@ -133,6 +135,12 @@ public class DataBaseProfileService {
 
         return date;
     }
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss +0000");
+
+    //------------------
+    // ReadProfileRTDB
+    //------------------
 
     public static void readProfileRTDB() {
         Log.d(TAG, "test start readProfileRTDB");
@@ -165,7 +173,6 @@ public class DataBaseProfileService {
                         e.printStackTrace();
                     }
 
-
                     String currentAppVersion = profileSnap.child("currentAppVersion").getValue(String.class);
                     String email = profileSnap.child("email").getValue(String.class);
                     String employer = profileSnap.child("employer").getValue(String.class);
@@ -175,7 +182,10 @@ public class DataBaseProfileService {
                     String nickname = profileSnap.child("nickname").getValue(String.class);
                     String oS = profileSnap.child("oS").getValue(String.class);
                     Gender gender = profileSnap.child("Gender").getValue(Gender.class);
-                    ProfileStatus status = profileSnap.child("status").getValue(ProfileStatus.class);
+
+                    String statusString = profileSnap.child("status").getValue(String.class);
+                    ProfileStatus status = ProfileStatus.valueFor(statusString);
+
                     String ville = profileSnap.child("ville").getValue(String.class);
                     int secretCode = profileSnap.child("secretCode").getValue(Integer.class);
                     int difficulty = profileSnap.child("difficulty").getValue(Integer.class);
