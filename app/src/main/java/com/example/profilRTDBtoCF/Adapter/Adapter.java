@@ -2,29 +2,24 @@ package com.example.profilRTDBtoCF.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.profilRTDBtoCF.CreateNote;
 import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.R;
 
 import java.util.List;
 
-import static android.support.v4.content.ContextCompat.startActivity;
-
-public class AdapterListe extends ArrayAdapter<Profile> {
+public class Adapter extends ArrayAdapter<Profile> {
 
     // Constructeur Adapter
     // Appeler par "NoteListe" avec en paramètres le context + la liste des profiles
-    public AdapterListe(Context mContext, List<Profile> profiles)
+    public Adapter(Context mContext, Profile profiles)
     {
         // Super : en référence à la class EXTENDS : "ArrayAdapter"
-        super(mContext,R.layout.content_adapter_liste, profiles);
+        super(mContext,R.layout.content_adapter_liste, (List<Profile>) profiles);
     }
 
     // Je défini moi meme le comportement de la methode "getView" qui appartient à "ArrayAdapter"
@@ -57,7 +52,7 @@ public class AdapterListe extends ArrayAdapter<Profile> {
                 String title = currentProfile.getTitle();
                 String description = currentProfile.getDescription();
 
-                Intent intent = new Intent(getContext(), CreateNote.class);
+                Intent intent = new Intent(getContext(), CreateProfile.class);
                 intent.putExtra("uid", uid);
                 intent.putExtra("profile", title);
                 intent.putExtra("description", description);

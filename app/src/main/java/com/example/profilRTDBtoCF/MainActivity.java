@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.profilRTDBtoCF.Base.ProfilesListe;
+import com.example.profilRTDBtoCF.Base.Profiles;
 import com.example.profilRTDBtoCF.Helper.Helper;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (this.isCurrentUserLogged())
                 {
-                    this.startNotesListeActivity();
+                    this.startProfilesListeActivity();
                 } else {
                     this.startSignInActivity();
                 }
@@ -84,9 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         RC_SIGN_IN);
             }
 
-            // Launching "NotesListeActivity"
-            private void startNotesListeActivity() {
-                Intent intent = new Intent(MainActivity.this, ProfilesListe.class);
+            private void startProfilesListeActivity() {
+                Intent intent = new Intent(MainActivity.this, Profiles.class);
                 startActivity(intent);
             }
         });

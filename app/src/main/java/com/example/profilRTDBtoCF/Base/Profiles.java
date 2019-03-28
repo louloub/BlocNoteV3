@@ -4,36 +4,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.profilRTDBtoCF.Adapter.AdapterListe;
-import com.example.profilRTDBtoCF.CreateNote;
+import com.example.profilRTDBtoCF.Adapter.Adapter;
+import com.example.profilRTDBtoCF.CreateProfile;
 import com.example.profilRTDBtoCF.Listener.ProfilesManagerListener;
 import com.example.profilRTDBtoCF.Manager.ProfileManager;
 import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.R;
+import com.example.profilRTDBtoCF.Services.FirestoreProfileService;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class ProfilesListe extends AppCompatActivity implements ProfilesManagerListener {
+import static com.facebook.login.widget.ProfilePictureView.TAG;
 
-    // Firabase
+public class Profiles extends AppCompatActivity implements ProfilesManagerListener {
+
     private FirebaseAuth mAuth;
-
-    // ListView
     private ListView listView;
+    private Adapter mMAdapter;
 
-    private AdapterListe mMAdapterList;
-
-    // Button Floating
     FloatingActionButton floatingActionButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes_liste);
+        setContentView(R.layout.activity_profile);
+
+        Log.d(TAG, "test onCreate Profiles");
 
         // Copie des profiles de CF vers RTDB
         // "ProfileManager.get_instance()" on appel le manager
@@ -41,41 +42,58 @@ public class ProfilesListe extends AppCompatActivity implements ProfilesManagerL
 
         listView = findViewById(R.id.listView);
 
-        ProfileManager.get_instance().setListener(this);
-        // récupère la liste
-        ArrayList<Profile> profiles = ProfileManager.get_instance().getProfiles();
+        Log.d(TAG, "test onCreate Profiles 1");
 
+        ProfileManager.get_instance().setListener(this);
+        // String userId = ProfileManager.get_instance().getUserId();
+
+        String userId = "10213328234656981" ;
+
+        Log.d(TAG, "test onCreate Profiles 2");
+
+        FirestoreProfileService.loadProfileCF(userId);
+
+        // récupère la liste
+        // ArrayList<Profile> profiles = ProfileManager.get_instance().getProfile();
+
+        Log.d(TAG, "test onCreate Profiles 3");
+
+        /*
         if (profiles.size() == 0) {
             // demande au manager de lui amener la liste de note
             ProfileManager.get_instance().loadProfile();
         }
         else {
-            mMAdapterList = new AdapterListe(ProfilesListe.this, profiles);
-            listView.setAdapter(mMAdapterList);
+            mMAdapter = new Adapter(Profiles.this, profiles);
+            listView.setAdapter(mMAdapter);
         }
+        */
 
         //--------
         // ADAPTER
         //--------
 
-        // Création de l'adapteur view (list view) avec le modele XML
-        if(mMAdapterList != null)
+        // Création de l'adapteur view avec le modele XML
+        if(mMAdapter != null)
         {
-            listView.setAdapter(mMAdapterList);
+            listView.setAdapter(mMAdapter);
         }
 
         // ---------
         // Boutton Floating
         // ---------
 
+        /*
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfilesListe.this, CreateNote.class);
+                Intent intent = new Intent(Profiles.this, CreateProfile.class);
                 startActivity(intent);
             }
         });
+
+        */
     }
 
     @Override
@@ -84,16 +102,19 @@ public class ProfilesListe extends AppCompatActivity implements ProfilesManagerL
     }
 
     @Override
-    public void onProfileListLoaded() {
+    public void onProfileLoaded() {
 
-        ArrayList<Profile> profiles = ProfileManager.get_instance().getProfiles();
-        // Implémentation d'un nouvel adapterListe (ArrayAdapter) "mMAdapterList"
-        mMAdapterList = new AdapterListe(ProfilesListe.this, profiles);
+        Profile profile = ProfileManager.get_instance().getProfile();
 
-        // On associe l'adapter "mMAdapterList "à l'adapter view "ListView" avec "setAdapter"
-        listView.setAdapter(mMAdapterList);
+        /*
+        // Implémentation d'un nouvel adapterListe (ArrayAdapter) "mMAdapter"
+        mMAdapter = new Adapter(Profiles.this, profiles);
 
-        mMAdapterList.notifyDataSetChanged();
+        // On associe l'adapter "mMAdapter "à l'adapter view "ListView" avec "setAdapter"
+        listView.setAdapter(mMAdapter);
+        mMAdapter.notifyDataSetChanged();
+        */
+
 
     }
 }

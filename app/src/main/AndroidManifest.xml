@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".CreateNote"></activity>
-        <activity android:name=".Base.ProfilesListe" />
+        <activity android:name=".CreateProfile"></activity>
+        <activity android:name=".Base.Profiles" />
         <activity android:name=".Auth.ProfilActivity" />
         <activity android:name=".MainActivity">
 

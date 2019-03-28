@@ -10,14 +10,12 @@ import com.example.profilRTDBtoCF.Services.DataBaseProfileService;
 import com.example.profilRTDBtoCF.Services.FirestoreProfileService;
 
 
-import java.util.ArrayList;
-
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 
 public class ProfileManager implements DataBaseServiceListener, CloudFirestoreServiceListener {
 
     private static ProfileManager _instance;
-    private ArrayList<Profile> profiles = new ArrayList<>();
+    private Profile profile ;
 
     private String userId = "10213328234656981";
 
@@ -31,17 +29,32 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
         return _instance;
     }
 
+    // -----------------------
     // Constructeur du manager
+    // -----------------------
+
     private ProfileManager() {
         // définir les listener
         FirestoreProfileService.setListenerCF(this);
         DataBaseProfileService.setListenerRTDB(this);
-        Log.w(TAG, "définition listener");
+        Log.d(TAG, "test définition listener");
 
     }
 
-    public ArrayList<Profile> getProfiles() {
-        return profiles;
+    // -----------------------
+    // GETTER SETTER
+    // -----------------------
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 
     public void setListener(ProfilesManagerListener listener) {
@@ -65,11 +78,11 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     }
 
     // On s'assure que la liste est bien loaded avec un LISTENER
-    public void listLoaded() {
+    public void profileLoaded() {
 
         if(listener != null)
         {
-            listener.onProfileListLoaded();
+            listener.onProfileLoaded();
         }
     }
 
@@ -78,14 +91,15 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     //---------
 
     @Override
-    public void onProfilesLoadedFromCF(ArrayList<Profile> loadedProfilesCF) {
-        this.profiles = loadedProfilesCF;
-        // listenerCF.onProfilesLoadedFromCF(loadedProfilesCF);
+    public void onProfileLoadedFromCF(Profile profile) {
+        this.profile = profile;
+        // listenerCF.onProfileLoadedFromCF(loadedProfilesCF);
     }
 
     @Override
     public void onProfileNotFoundInCF() {
-        DataBaseProfileService.readProfileRTDB(userId);
+        DataBaseProfileService.readProfileRTDB();
+        Log.d(TAG, "test ProfileManager onProfileNotFoundInCF");
     }
 
     //---------
@@ -93,8 +107,8 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     //---------
 
     @Override
-    public void onProfileLoadedFromRTDB(ArrayList<Profile> loadedProfilesRTDB) {
-        this.profiles = loadedProfilesRTDB;
-        FirestoreProfileService.writeProfileList(loadedProfilesRTDB);
+    public void onProfileLoadedFromRTDB(Profile profile) {
+        // this.profile = loadedProfilesRTDB;
+        FirestoreProfileService.writeProfile(profile);
     }
 }

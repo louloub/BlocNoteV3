@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.profilRTDBtoCF.Gender;
 import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
+import com.example.profilRTDBtoCF.Manager.ProfileManager;
 import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.ProfileStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 
@@ -89,18 +89,16 @@ public class FirestoreProfileService {
             // Override : On s'approprie la methode "onComplete" qui est étendue de "AppCompatActivity"
             // onComplete : Called when the Task completes.
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                
-                    if (task.isSuccessful()) {
 
-                        ArrayList<Profile> listProfile = new ArrayList<>();
+                    if (task.isSuccessful()) {
 
                         DocumentSnapshot document = task.getResult();
 
-                        Log.w(TAG, "before if loadProfilCF");
+                        Log.d(TAG, "test before if loadProfilCF");
 
-                        if (document.equals(null)) {
+                        if (document.exists()) {
 
-                            Log.w(TAG, "if loadProfilCF");
+                            Log.d(TAG, "test if loadProfilCF");
 
                             String identifier = document.getId();
 
@@ -134,35 +132,28 @@ public class FirestoreProfileService {
                                     email, employer, fullName, instanceID, lastConnectionTime,
                                     nickname, oS, gender, status, ville, secretCode, difficulty);
 
-                            listProfile.add(profile);
-
-                            listenerCF.onProfilesLoadedFromCF(listProfile);
+                            listenerCF.onProfileLoadedFromCF(profile);
                         }
 
                         else {
-                            Log.w(TAG, "else loadProfilCF");
+
+                            Log.d(TAG, "test else loadProfilCF");
                             listenerCF.onProfileNotFoundInCF();
-                            Log.w(TAG, "else loadProfilCF after listener");
+                            Log.d(TAG, "test else loadProfilCF after listener");
 
                         }
                     }
                 }
-
         });
     }
 
-    // Ecrire list de note dans CF
-    public static void writeProfileList(ArrayList<Profile> profileListToWrite){
+    public static void writeProfile(Profile profileToWrite){
 
-        // Boucle FOR pour parcourir la liste des notes passée en paramètres
-        for (Profile profile : profileListToWrite) {
-            // Pour chaque profile je construis une hashmap pour écrire en BDD
+            Profile profile = profileToWrite;
             Map<String, Object> profileMap = profile.toMap();
-            // Je créé ma référence
             CollectionReference profilesReference = FirebaseFirestore.getInstance().collection(PROFILE_COLLECTION);
-            // J'écris la hasmap avec ma référence
             profilesReference.add(profileMap);
 
-        }
+
     }
 }

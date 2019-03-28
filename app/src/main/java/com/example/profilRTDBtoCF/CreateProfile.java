@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateNote extends AppCompatActivity {
+public class CreateProfile extends AppCompatActivity {
 
     EditText textInput;
     EditText textInputDescription;
@@ -46,7 +46,7 @@ public class CreateNote extends AppCompatActivity {
                 if (currentProfile == null) {
 
                     FirestoreProfileService.saveToFirebase(textInput.getText().toString(), textInputDescription.getText().toString());
-                    Toast.makeText(CreateNote.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateProfile.this, "Enregistré sur Firestore", Toast.LENGTH_LONG).show();
                 } else {
 
                     /*
@@ -58,7 +58,7 @@ public class CreateNote extends AppCompatActivity {
 
                     FirestoreProfileService.changeToFirebase(currentProfile);
 
-                    Toast.makeText(CreateNote.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateProfile.this, "Modifié sur Firestore", Toast.LENGTH_LONG).show();
                 */
                 }
             }

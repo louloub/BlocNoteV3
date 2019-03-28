@@ -5,5 +5,5 @@ import com.example.profilRTDBtoCF.Profile;
 import java.util.ArrayList;
 
 public interface DataBaseServiceListener {
-    void onProfileLoadedFromRTDB(ArrayList<Profile> loadedProfiles);
+    void onProfileLoadedFromRTDB(Profile profile);
 }
