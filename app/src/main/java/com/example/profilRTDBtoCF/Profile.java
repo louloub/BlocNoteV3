@@ -1,7 +1,5 @@
 package com.example.profilRTDBtoCF;
 
-import android.os.Parcel;
-
 import java.util.Date;
 import java.util.HashMap;
 
@@ -16,19 +14,17 @@ public class Profile {
     private String bio;
     private Date birthday;
     private Date creationDate;
-    private String currentAppVersion;
+    private String currentVersion;
     private String email;
     private String employer;
     private String fullName;
     private String instanceID;
-    private Date lastConnectionTime;
+    private Date lastConnection;
     private String nickname;
     private String oS;
     private Gender gender;
     private ProfileStatus status;
     private String ville;
-    private int secretCode;
-    private int difficulty;
 
     public Profile() {}
 
@@ -37,29 +33,27 @@ public class Profile {
     // ----------------
 
     public Profile (Integer age, String bio, Date birthday,
-                   Date creationTime, String currentAppVersion,
+                   Date creationTime, String currentVersion,
                    String email, String employer, String fullName, String instanceID,
                     Date lastConnectionTime, String nickname, String oS, Gender gender,
-                    ProfileStatus status, String ville, int secretCode, int difficulty)
+                    ProfileStatus status, String ville)
     {
         this.identifier = identifier;
         this.age = age;
         this.bio = bio;
         this.birthday = birthday;
         this.creationDate = creationTime;
-        this.currentAppVersion = currentAppVersion;
+        this.currentVersion = currentVersion;
         this.email = email;
         this.employer = employer;
         this.fullName = fullName;
         this.instanceID = instanceID;
-        this.lastConnectionTime = lastConnectionTime;
+        this.lastConnection = lastConnection;
         this.nickname = nickname;
         this.oS = oS;
         this.gender = gender;
         this.status = status;
         this.ville = ville;
-        this.secretCode = secretCode;
-        this.difficulty = difficulty;
     }
 
     // ----------------
@@ -106,12 +100,12 @@ public class Profile {
         this.creationDate = creationDate;
     }
 
-    public String getCurrentAppVersion() {
-        return currentAppVersion;
+    public String getCurrentVersion() {
+        return currentVersion;
     }
 
-    public void setCurrentAppVersion(String currentAppVersion) {
-        this.currentAppVersion = currentAppVersion;
+    public void setCurrentVersion(String currentVersion) {
+        this.currentVersion = currentVersion;
     }
 
     public String getEmail() {
@@ -146,12 +140,12 @@ public class Profile {
         this.instanceID = instanceID;
     }
 
-    public Date getLastConnectionTime() {
-        return lastConnectionTime;
+    public Date getLastConnection() {
+        return lastConnection;
     }
 
     public void setLastConnectionTime(Date lastConnectionTime) {
-        this.lastConnectionTime = lastConnectionTime;
+        this.lastConnection = lastConnection;
     }
 
     public String getNickname() {
@@ -194,22 +188,6 @@ public class Profile {
         this.ville = ville;
     }
 
-    public int getSecretCode() {
-        return secretCode;
-    }
-
-    public void setSecretCode(int secretCode) {
-        this.secretCode = secretCode;
-    }
-
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
     // ----------------
     // HASHMAP        |
     // ----------------
@@ -221,19 +199,18 @@ public class Profile {
         result.put("bio", bio);
         result.put("birthday", birthday);
         result.put("creationDate", creationDate);
-        result.put("currentAppVersion", currentAppVersion);
+        result.put("currentVersion", currentVersion);
         result.put("email", email);
         result.put("employer", employer);
         result.put("fullName", fullName);
         result.put("instanceID", instanceID);
-        result.put("lastConnectionTime", lastConnectionTime);
+        result.put("lastConnectionTime", lastConnection);
         result.put("nickname", nickname);
         result.put("oS", oS);
         result.put("gender", gender);
         result.put("status", status);
         result.put("ville", ville);
-        result.put("secretCode", secretCode);
-        result.put("difficulty", difficulty);
+
         return result;
     }
 }

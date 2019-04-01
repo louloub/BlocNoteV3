@@ -45,6 +45,8 @@ public class DataBaseProfileService {
 
     public static void readCFwriteRTDB() {
 
+        Log.d(TAG, "test DataBaseProfileService readCFwriteRTDB");
+
         // FirestoreProfileService.loadProfileCF();
 
         //----------
@@ -82,12 +84,10 @@ public class DataBaseProfileService {
                         Gender gender = Gender.valueFor(document.getString("gender"));
                         ProfileStatus status = ProfileStatus.valueFor(document.getString("status"));
                         String ville = document.getString("ville");
-                        int secretCode = Integer.parseInt(Objects.requireNonNull(document.getString("secretCode")));
-                        int difficulty = Integer.parseInt(Objects.requireNonNull(document.getString("difficulty")));
 
                         Profile profile = new Profile(age, bio, birthday, creationDate, currentAppVersion,
                                 email, employer, fullName, instanceID, lastConnectionTime,
-                                nickname, oS, gender, status, ville, secretCode, difficulty);
+                                nickname, oS, gender, status, ville);
 
 
                         // ProfileManager.get_instance().getProfile().add(profile);
@@ -154,9 +154,12 @@ public class DataBaseProfileService {
                 {
                     Log.d(TAG, "test if onDataChange readProfileRTDB");
 
+                    String identifier = profileSnap.getKey();
+
                     Integer age = profileSnap.child("age").getValue(Integer.class);
                     String bio = profileSnap.child("bio").getValue(String.class);
 
+                    // Birthday
                     String birthdayString = profileSnap.child("birthday").getValue(String.class);
                     Date birthday = null;
                     try {
@@ -165,6 +168,7 @@ public class DataBaseProfileService {
                         e.printStackTrace();
                     }
 
+                    // CréationDate
                     String creationDateString = profileSnap.child("creationDate").getValue(String.class);
                     Date creationDate = null;
                     try {
@@ -173,26 +177,35 @@ public class DataBaseProfileService {
                         e.printStackTrace();
                     }
 
-                    String currentAppVersion = profileSnap.child("currentAppVersion").getValue(String.class);
+                    String currentVersion = profileSnap.child("currentVersion").getValue(String.class);
                     String email = profileSnap.child("email").getValue(String.class);
                     String employer = profileSnap.child("employer").getValue(String.class);
                     String fullName = profileSnap.child("fullName").getValue(String.class);
                     String instanceID = profileSnap.child("instanceID").getValue(String.class);
-                    Date lastConnectionTime = profileSnap.child("lastConnectionTime").getValue(Date.class);
+
+                    // lastConnection
+                    String lastConnectionString = profileSnap.child("lastConnection").child("date").getValue(String.class);
+                    Date lastConnection = null;
+                    try {
+                        lastConnection = convertStringToDate(lastConnectionString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
                     String nickname = profileSnap.child("nickname").getValue(String.class);
                     String oS = profileSnap.child("oS").getValue(String.class);
                     Gender gender = profileSnap.child("Gender").getValue(Gender.class);
 
+                    // Status
                     String statusString = profileSnap.child("status").getValue(String.class);
                     ProfileStatus status = ProfileStatus.valueFor(statusString);
 
                     String ville = profileSnap.child("ville").getValue(String.class);
-                    int secretCode = profileSnap.child("secretCode").getValue(Integer.class);
-                    int difficulty = profileSnap.child("difficulty").getValue(Integer.class);
 
-                    Profile profile = new Profile(age, bio, birthday, creationDate, currentAppVersion,
-                            email, employer, fullName, instanceID, lastConnectionTime,
-                            nickname, oS, gender, status, ville, secretCode, difficulty);
+                    Profile profile = new Profile(age, bio, birthday, creationDate, currentVersion,
+                            email, employer, fullName, instanceID, lastConnection,
+                            nickname, oS, gender, status, ville);
 
                     listenerRTDB.onProfileLoadedFromRTDB(profile);
                 }

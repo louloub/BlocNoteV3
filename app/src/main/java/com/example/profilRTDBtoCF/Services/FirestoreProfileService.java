@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.profilRTDBtoCF.Gender;
 import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
-import com.example.profilRTDBtoCF.Manager.ProfileManager;
 import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.ProfileStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,7 +15,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,19 +55,17 @@ public class FirestoreProfileService {
         profilMap.put("bio",profileToUpdate.getBio());
         profilMap.put("birthday",profileToUpdate.getBirthday());
         profilMap.put("creationDate",profileToUpdate.getCreationDate());
-        profilMap.put("currentAppVersion",profileToUpdate.getCurrentAppVersion());
+        profilMap.put("currentAppVersion",profileToUpdate.getCurrentVersion());
         profilMap.put("email",profileToUpdate.getEmail());
         profilMap.put("employer",profileToUpdate.getEmployer());
         profilMap.put("fullName",profileToUpdate.getFullName());
         profilMap.put("instanceIDge",profileToUpdate.getInstanceID());
-        profilMap.put("lastConnectionTime",profileToUpdate.getLastConnectionTime());
+        profilMap.put("lastConnectionTime",profileToUpdate.getLastConnection());
         profilMap.put("nickname",profileToUpdate.getNickname());
         profilMap.put("oS",profileToUpdate.getoS());
         profilMap.put("gender",profileToUpdate.getGender());
         profilMap.put("status",profileToUpdate.getStatus());
         profilMap.put("ville",profileToUpdate.getVille());
-        profilMap.put("secretCode",profileToUpdate.getSecretCode());
-        profilMap.put("difficulty",profileToUpdate.getDifficulty());
 
         return FirebaseFirestore.getInstance()
                 .collection(CHAT_COLLECTION)
@@ -118,19 +114,12 @@ public class FirestoreProfileService {
                             ProfileStatus status = ProfileStatus.valueFor(document.getString("status"));
                             String ville = document.getString("ville");
 
-                            // PB avec les INT
-                            int secretCode = (int) document.get("secretCode");
-                            int difficulty = (int) document.get("difficulty");
-
-                            // int secretCode = Integer.parseInt(Objects.requireNonNull(document.getString("secretCode")));
-                            // int difficulty = Integer.parseInt(Objects.requireNonNull(document.getString("difficulty")));
-
                             // A remettre au début de la liste comme l'ordre de l'objet
                             Integer age = Integer.valueOf("age");
 
                             Profile profile = new Profile(age, bio, birthday, creationDate, currentAppVersion,
                                     email, employer, fullName, instanceID, lastConnectionTime,
-                                    nickname, oS, gender, status, ville, secretCode, difficulty);
+                                    nickname, oS, gender, status, ville);
 
                             listenerCF.onProfileLoadedFromCF(profile);
                         }
