@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.profilRTDBtoCF.Gender;
 import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
+import com.example.profilRTDBtoCF.Manager.ProfileManager;
 import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.ProfileStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,7 @@ public class FirestoreProfileService {
     private static final String CHAT_COLLECTION = "chats";
     private static final String DOCUMENT_NAME = "document";
     private static final String PROFILE_COLLECTION = "profiles";
+    private static final String IDENTIFIER = ProfileManager.getUserId();
 
     private static CloudFirestoreServiceListener listenerCF;
 
@@ -98,6 +100,7 @@ public class FirestoreProfileService {
 
                             String identifier = document.getId();
 
+
                             String bio = document.getString("bio");
                             Date birthday = document.getDate("birthday");
                             Date creationDate = document.getDate("creationDate");
@@ -117,7 +120,7 @@ public class FirestoreProfileService {
                             // A remettre au début de la liste comme l'ordre de l'objet
                             Integer age = Integer.valueOf("age");
 
-                            Profile profile = new Profile(age, bio, birthday, creationDate, currentAppVersion,
+                            Profile profile = new Profile(identifier, age, bio, birthday, creationDate, currentAppVersion,
                                     email, employer, fullName, instanceID, lastConnectionTime,
                                     nickname, oS, gender, status, ville);
 
@@ -139,9 +142,17 @@ public class FirestoreProfileService {
     public static void writeProfile(Profile profileToWrite){
 
             Profile profile = profileToWrite;
+
             Map<String, Object> profileMap = profile.toMap();
-            CollectionReference profilesReference = FirebaseFirestore.getInstance().collection(PROFILE_COLLECTION);
-            profilesReference.add(profileMap);
+
+            DocumentReference profilesReference = FirebaseFirestore
+                    .getInstance()
+                    .collection(PROFILE_COLLECTION)
+                    .document(IDENTIFIER);
+
+            profilesReference.set(profileMap);
+
+            // LISTENER à créer : onProfileWriteOnCFwRTDB
 
 
     }

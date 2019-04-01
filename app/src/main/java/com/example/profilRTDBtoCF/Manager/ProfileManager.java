@@ -17,7 +17,7 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     private static ProfileManager _instance;
     private Profile profile ;
 
-    private String userId = "10213328234656981";
+    private static String userId = "10213328234656981";
 
     // Déclaration du "listener" de "ProfilesManagerListener"
     private ProfilesManagerListener listener;
@@ -49,7 +49,7 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
         this.userId = userId;
     }
 
-    public String getUserId() {
+    public static String getUserId() {
         return userId;
     }
 

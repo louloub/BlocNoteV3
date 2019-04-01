@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.profilRTDBtoCF.Gender;
 import com.example.profilRTDBtoCF.Helper.Helper;
 import com.example.profilRTDBtoCF.Listener.DataBaseServiceListener;
+import com.example.profilRTDBtoCF.Manager.ProfileManager;
 import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.ProfileStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -85,7 +86,7 @@ public class DataBaseProfileService {
                         ProfileStatus status = ProfileStatus.valueFor(document.getString("status"));
                         String ville = document.getString("ville");
 
-                        Profile profile = new Profile(age, bio, birthday, creationDate, currentAppVersion,
+                        Profile profile = new Profile(identifier, age, bio, birthday, creationDate, currentAppVersion,
                                 email, employer, fullName, instanceID, lastConnectionTime,
                                 nickname, oS, gender, status, ville);
 
@@ -154,7 +155,7 @@ public class DataBaseProfileService {
                 {
                     Log.d(TAG, "test if onDataChange readProfileRTDB");
 
-                    String identifier = profileSnap.getKey();
+                    String identifier = ProfileManager.getUserId();
 
                     Integer age = profileSnap.child("age").getValue(Integer.class);
                     String bio = profileSnap.child("bio").getValue(String.class);
@@ -203,7 +204,7 @@ public class DataBaseProfileService {
 
                     String ville = profileSnap.child("ville").getValue(String.class);
 
-                    Profile profile = new Profile(age, bio, birthday, creationDate, currentVersion,
+                    Profile profile = new Profile(identifier, age, bio, birthday, creationDate, currentVersion,
                             email, employer, fullName, instanceID, lastConnection,
                             nickname, oS, gender, status, ville);
 

@@ -32,7 +32,7 @@ public class Profile {
     // Constructeur |
     // ----------------
 
-    public Profile (Integer age, String bio, Date birthday,
+    public Profile (String identifier, Integer age, String bio, Date birthday,
                    Date creationTime, String currentVersion,
                    String email, String employer, String fullName, String instanceID,
                     Date lastConnectionTime, String nickname, String oS, Gender gender,
