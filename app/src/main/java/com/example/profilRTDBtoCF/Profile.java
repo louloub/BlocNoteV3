@@ -20,7 +20,7 @@ public class Profile {
     private String fullName;
     private String instanceID;
     private Date lastConnection;
-    private String nickname;
+    private static String nickname;
     private String oS;
     private Gender gender;
     private ProfileStatus status;
@@ -54,6 +54,10 @@ public class Profile {
         this.gender = gender;
         this.status = status;
         this.ville = ville;
+    }
+
+    public static String getNickname1(Profile profile) {
+        return nickname;
     }
 
     // ----------------
@@ -148,7 +152,7 @@ public class Profile {
         this.lastConnection = lastConnection;
     }
 
-    public String getNickname() {
+    public static String getNickname() {
         return nickname;
     }
 

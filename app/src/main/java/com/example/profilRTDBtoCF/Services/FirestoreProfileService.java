@@ -10,13 +10,11 @@ import com.example.profilRTDBtoCF.Profile;
 import com.example.profilRTDBtoCF.ProfileStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,7 +100,8 @@ public class FirestoreProfileService {
 
                             String identifier = document.getId();
 
-                            // ATTENTION : on ecrit en INT sur CF, on lit en LONG et on traduit en INT direct
+                            // ATTENTION : on ecrit en INT sur CF, on lit en LONG
+                            // et on traduit en INT direct avec "intValue"
                             int age = Objects.requireNonNull(document.getLong("age")).intValue();
 
                             String bio = document.getString("bio");
@@ -152,8 +151,13 @@ public class FirestoreProfileService {
 
             profilesReference.set(profileMap);
 
-            // LISTENER à créer : onProfileWriteOnCFwRTDB
+            listenerCF.onProfileWriteInCF(profile);
 
+    }
 
+    public static String writeProfileOnTextView (Profile profile) {
+        String nicknameToTextView = Profile.getNickname1(profile);
+        Log.d(TAG, "writeProfileOnTextView" + nicknameToTextView);
+        return nicknameToTextView;
     }
 }

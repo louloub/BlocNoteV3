@@ -1,7 +1,9 @@
 package com.example.profilRTDBtoCF.Manager;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.profilRTDBtoCF.Base.Profiles;
 import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
 import com.example.profilRTDBtoCF.Listener.DataBaseServiceListener;
 import com.example.profilRTDBtoCF.Listener.ProfilesManagerListener;
@@ -10,6 +12,7 @@ import com.example.profilRTDBtoCF.Services.DataBaseProfileService;
 import com.example.profilRTDBtoCF.Services.FirestoreProfileService;
 
 
+import static android.app.PendingIntent.getActivity;
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 
 public class ProfileManager implements DataBaseServiceListener, CloudFirestoreServiceListener {
@@ -99,7 +102,12 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     @Override
     public void onProfileNotFoundInCF() {
         DataBaseProfileService.readProfileRTDB();
-        Log.d(TAG, "test ProfileManager onProfileNotFoundInCF");
+    }
+
+    @Override
+    public void onProfileWriteInCF(Profile profile) {
+        Log.d(TAG, "onProfileWriteInCF");
+        FirestoreProfileService.writeProfileOnTextView(profile);
     }
 
     //---------

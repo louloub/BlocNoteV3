@@ -45,11 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 // Si l'utilisateur est connecté, alors on passe sur l'activité suivante
-                // Start appropriate activity
-
                 if (this.isCurrentUserLogged())
                 {
-                    this.startProfilesListeActivity();
+                    this.startProfilesActivity();
                 } else {
                     this.startSignInActivity();
                 }
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         RC_SIGN_IN);
             }
 
-            private void startProfilesListeActivity() {
+            private void startProfilesActivity() {
                 Intent intent = new Intent(MainActivity.this, Profiles.class);
                 startActivity(intent);
             }
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.handleResponseAfterSignIn(requestCode, resultCode, data);
     }
 
-    // Method that handles (manipuler) response after SignIn Activity close
+    // Method that handles (manipuler) response after SignIn Activity closs
     private void handleResponseAfterSignIn(int requestCode, int resultCode, Intent data) {
 
         IdpResponse response = IdpResponse.fromResultIntent(data);
@@ -141,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String urlPicture = (this.getCurrentUser().getPhotoUrl() != null ? this.getCurrentUser().getPhotoUrl().toString() : null);
             String username = this.getCurrentUser().getDisplayName();
             String uid = this.getCurrentUser().getUid();
-
             Helper.createUser(uid, username, urlPicture).addOnFailureListener(this.onFailureListener());
         }
     }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.profilRTDBtoCF.Adapter.Adapter;
 import com.example.profilRTDBtoCF.CreateProfile;
@@ -26,6 +27,7 @@ public class Profiles extends AppCompatActivity implements ProfilesManagerListen
     private FirebaseAuth mAuth;
     private ListView listView;
     private Adapter mMAdapter;
+    private TextView ViewProfil;
 
     FloatingActionButton floatingActionButton;
 
@@ -34,29 +36,21 @@ public class Profiles extends AppCompatActivity implements ProfilesManagerListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Log.d(TAG, "test onCreate Profiles");
-
         // Copie des profiles de CF vers RTDB
         // "ProfileManager.get_instance()" on appel le manager
         // ProfileManager.get_instance().readCFwriteRTDB();
 
         listView = findViewById(R.id.listView);
 
-        Log.d(TAG, "test onCreate Profiles 1");
-
         ProfileManager.get_instance().setListener(this);
         // String userId = ProfileManager.get_instance().getUserId();
 
         String userId = "10213328234656981" ;
 
-        Log.d(TAG, "test onCreate Profiles 2");
-
         FirestoreProfileService.loadProfileCF(userId);
 
         // récupère la liste
         // ArrayList<Profile> profiles = ProfileManager.get_instance().getProfile();
-
-        Log.d(TAG, "test onCreate Profiles 3");
 
         /*
         if (profiles.size() == 0) {
@@ -68,6 +62,16 @@ public class Profiles extends AppCompatActivity implements ProfilesManagerListen
             listView.setAdapter(mMAdapter);
         }
         */
+
+        /*
+        public static void getNickNameToViewProfil (String nicknameToTextView) {
+            ViewProfil = findViewById(R.id.ViewProfil);
+            // String profileNickname = new Profile(getNickname());
+            ViewProfil.setText(nicknameToTextView);
+        }
+        */
+
+
 
         //--------
         // ADAPTER
@@ -92,7 +96,6 @@ public class Profiles extends AppCompatActivity implements ProfilesManagerListen
                 startActivity(intent);
             }
         });
-
         */
     }
 
@@ -114,7 +117,5 @@ public class Profiles extends AppCompatActivity implements ProfilesManagerListen
         listView.setAdapter(mMAdapter);
         mMAdapter.notifyDataSetChanged();
         */
-
-
     }
 }
