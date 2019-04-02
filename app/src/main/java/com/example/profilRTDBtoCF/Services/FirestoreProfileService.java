@@ -16,9 +16,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.facebook.login.widget.ProfilePictureView.TAG;
 
@@ -100,28 +102,26 @@ public class FirestoreProfileService {
 
                             String identifier = document.getId();
 
+                            // ATTENTION : on ecrit en INT sur CF, on lit en LONG et on traduit en INT direct
+                            int age = Objects.requireNonNull(document.getLong("age")).intValue();
 
                             String bio = document.getString("bio");
                             Date birthday = document.getDate("birthday");
                             Date creationDate = document.getDate("creationDate");
-
                             String currentAppVersion = document.getString("currentAppVersion");
                             String email = document.getString("email");
                             String employer = document.getString("employer");
                             String fullName = document.getString("fullName");
                             String instanceID = document.getString("instanceID");
-                            Date lastConnectionTime = document.getDate("lastConnectionTime");
+                            Date lastConnection = document.getDate("lastConnection");
                             String nickname = document.getString("nickname");
                             String oS = document.getString("oS");
                             Gender gender = Gender.valueFor(document.getString("gender"));
                             ProfileStatus status = ProfileStatus.valueFor(document.getString("status"));
                             String ville = document.getString("ville");
 
-                            // A remettre au début de la liste comme l'ordre de l'objet
-                            Integer age = Integer.valueOf("age");
-
                             Profile profile = new Profile(identifier, age, bio, birthday, creationDate, currentAppVersion,
-                                    email, employer, fullName, instanceID, lastConnectionTime,
+                                    email, employer, fullName, instanceID, lastConnection,
                                     nickname, oS, gender, status, ville);
 
                             listenerCF.onProfileLoadedFromCF(profile);

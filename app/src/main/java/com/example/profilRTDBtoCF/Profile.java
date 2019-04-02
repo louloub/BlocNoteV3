@@ -35,7 +35,7 @@ public class Profile {
     public Profile (String identifier, Integer age, String bio, Date birthday,
                    Date creationTime, String currentVersion,
                    String email, String employer, String fullName, String instanceID,
-                    Date lastConnectionTime, String nickname, String oS, Gender gender,
+                    Date lastConnection, String nickname, String oS, Gender gender,
                     ProfileStatus status, String ville)
     {
         this.identifier = identifier;
@@ -144,7 +144,7 @@ public class Profile {
         return lastConnection;
     }
 
-    public void setLastConnectionTime(Date lastConnectionTime) {
+    public void setLastConnection(Date lastConnection) {
         this.lastConnection = lastConnection;
     }
 
@@ -204,7 +204,7 @@ public class Profile {
         result.put("employer", employer);
         result.put("fullName", fullName);
         result.put("instanceID", instanceID);
-        result.put("lastConnectionTime", lastConnection);
+        result.put("lastConnection", lastConnection);
         result.put("nickname", nickname);
         result.put("oS", oS);
         result.put("gender", gender);

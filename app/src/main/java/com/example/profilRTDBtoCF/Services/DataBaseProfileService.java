@@ -151,8 +151,7 @@ public class DataBaseProfileService {
             public void onDataChange(DataSnapshot profileSnap) {
                 Log.d(TAG, "test onDataChange readProfileRTDB");
 
-                if (profileSnap.exists())
-                {
+                if (profileSnap.exists()) {
                     Log.d(TAG, "test if onDataChange readProfileRTDB");
 
                     String identifier = ProfileManager.getUserId();
@@ -193,10 +192,10 @@ public class DataBaseProfileService {
                         e.printStackTrace();
                     }
 
-
                     String nickname = profileSnap.child("nickname").getValue(String.class);
-                    String oS = profileSnap.child("oS").getValue(String.class);
-                    Gender gender = profileSnap.child("Gender").getValue(Gender.class);
+                    String oS = profileSnap.child("os").getValue(String.class);
+                    String genderString = profileSnap.child("sexe").getValue(String.class);
+                    Gender gender = Gender.valueFor(genderString);
 
                     // Status
                     String statusString = profileSnap.child("status").getValue(String.class);
