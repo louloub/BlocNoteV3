@@ -1,7 +1,6 @@
 package com.example.profilRTDBtoCF.Manager;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.profilRTDBtoCF.Base.Profiles;
 import com.example.profilRTDBtoCF.Listener.CloudFirestoreServiceListener;
@@ -81,6 +80,7 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     }
 
     // On s'assure que la liste est bien loaded avec un LISTENER
+    /*
     public void profileLoaded() {
 
         if(listener != null)
@@ -88,6 +88,7 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
             listener.onProfileLoaded();
         }
     }
+    */
 
     //---------
     // LOAD CF
@@ -107,7 +108,10 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     @Override
     public void onProfileWriteInCF(Profile profile) {
         Log.d(TAG, "onProfileWriteInCF");
-        FirestoreProfileService.writeProfileOnTextView(profile);
+        // Profiles.writeProfileOnTextView();
+        listener.onProfileLoaded(profile);
+        // FirestoreProfileService.writeProfileOnTextView(profile);
+
     }
 
     //---------
@@ -117,6 +121,6 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
     @Override
     public void onProfileLoadedFromRTDB(Profile profile) {
         // this.profile = loadedProfilesRTDB;
-        FirestoreProfileService.writeProfile(profile);
+        FirestoreProfileService.writeProfileCF(profile);
     }
 }

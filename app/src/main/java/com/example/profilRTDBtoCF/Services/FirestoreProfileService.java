@@ -138,7 +138,7 @@ public class FirestoreProfileService {
         });
     }
 
-    public static void writeProfile(Profile profileToWrite){
+    public static void writeProfileCF(Profile profileToWrite){
 
             Profile profile = profileToWrite;
 
@@ -155,9 +155,12 @@ public class FirestoreProfileService {
 
     }
 
+    /*
     public static String writeProfileOnTextView (Profile profile) {
         String nicknameToTextView = Profile.getNickname1(profile);
         Log.d(TAG, "writeProfileOnTextView" + nicknameToTextView);
         return nicknameToTextView;
     }
+    */
+
 }
