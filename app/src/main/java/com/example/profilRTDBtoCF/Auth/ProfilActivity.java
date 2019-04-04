@@ -81,8 +81,6 @@ public class ProfilActivity extends BaseActivity {
                 .show();
     }
 
-
-
     // --------------------
     // REST REQUESTS
     // --------------------

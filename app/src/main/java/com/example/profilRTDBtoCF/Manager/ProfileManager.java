@@ -63,41 +63,29 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
         this.listener = listener;
     }
 
-    //---------
+    //-----------------------
     // READ
-    //---------
+    //-----------------------
 
     public void readCFwriteRTDB(){
         DataBaseProfileService.readCFwriteRTDB();
     }
 
-    //---------
+    //-----------------------
     // LOAD
-    //---------
+    //-----------------------
 
     public void loadProfile() {
         FirestoreProfileService.loadProfileCF(userId);
     }
 
-    // On s'assure que la liste est bien loaded avec un LISTENER
-    /*
-    public void profileLoaded() {
-
-        if(listener != null)
-        {
-            listener.onProfileLoaded();
-        }
-    }
-    */
-
-    //---------
+    //-----------------------
     // LOAD CF
-    //---------
+    //-----------------------
 
     @Override
     public void onProfileLoadedFromCF(Profile profile) {
         this.profile = profile;
-        // listenerCF.onProfileLoadedFromCF(loadedProfilesCF);
     }
 
     @Override
@@ -107,20 +95,16 @@ public class ProfileManager implements DataBaseServiceListener, CloudFirestoreSe
 
     @Override
     public void onProfileWriteInCF(Profile profile) {
-        Log.d(TAG, "onProfileWriteInCF");
-        // Profiles.writeProfileOnTextView();
         listener.onProfileLoaded(profile);
-        // FirestoreProfileService.writeProfileOnTextView(profile);
 
     }
 
-    //---------
+    //-----------------------
     // LOAD RTDB
-    //---------
+    //-----------------------
 
     @Override
     public void onProfileLoadedFromRTDB(Profile profile) {
-        // this.profile = loadedProfilesRTDB;
         FirestoreProfileService.writeProfileCF(profile);
     }
 }

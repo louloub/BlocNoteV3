@@ -44,42 +44,8 @@ public class Adapter extends ArrayAdapter<Profile> {
         titleTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Récupérer la profile sur laquelle on click
-                /*
-                Profile currentProfile = getItem(position);
-                String uid = currentProfile.getUid();
-                String title = currentProfile.getTitle();
-                String description = currentProfile.getDescription();
-
-                Intent intent = new Intent(getContext(), CreateProfile.class);
-                intent.putExtra("uid", uid);
-                intent.putExtra("profile", title);
-                intent.putExtra("description", description);
-                startActivity(getContext(),intent,Bundle.EMPTY);
-                */
             }
         });
-
-        /*
-
-        Profile profile = getItem(position);
-
-        String str = profile.getTitle();
-        String desc = profile.getDescription();
-
-        titleTextView.setText(str);
-        descriptionTextView.setText(desc);
-
-        */
-
-        // Récupérer la postiion de chaque item
-        // Profile currentNote = getItem(position);
-
-        // String noteText = currentNote.getTitle();
-
-        // Je prends le text de "currentNote" et je l'affiche sur le textView de la ligne correspondante
-        // titleTextView.setText(noteText);
 
         return convertView;
     }

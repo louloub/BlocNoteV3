@@ -144,7 +144,6 @@ public class DataBaseProfileService {
     //------------------
 
     public static void readProfileRTDB() {
-        Log.d(TAG, "test start readProfileRTDB");
 
         ValueEventListener profileListener = new ValueEventListener() {
             @Override

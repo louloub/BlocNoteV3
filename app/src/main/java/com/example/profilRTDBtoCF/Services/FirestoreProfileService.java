@@ -92,11 +92,7 @@ public class FirestoreProfileService {
 
                         DocumentSnapshot document = task.getResult();
 
-                        Log.d(TAG, "test before if loadProfilCF");
-
                         if (document.exists()) {
-
-                            Log.d(TAG, "test if loadProfilCF");
 
                             String identifier = document.getId();
 
@@ -127,11 +123,7 @@ public class FirestoreProfileService {
                         }
 
                         else {
-
-                            Log.d(TAG, "test else loadProfilCF");
                             listenerCF.onProfileNotFoundInCF();
-                            Log.d(TAG, "test else loadProfilCF after listener");
-
                         }
                     }
                 }
@@ -154,13 +146,4 @@ public class FirestoreProfileService {
             listenerCF.onProfileWriteInCF(profile);
 
     }
-
-    /*
-    public static String writeProfileOnTextView (Profile profile) {
-        String nicknameToTextView = Profile.getNickname1(profile);
-        Log.d(TAG, "writeProfileOnTextView" + nicknameToTextView);
-        return nicknameToTextView;
-    }
-    */
-
 }

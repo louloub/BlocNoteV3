@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 .createSignInIntentBuilder()
                                 .setTheme(R.style.LoginTheme) // Personnalisation de l'écran
                                 // Ajout des moyens d'authentification
-                                // Methode auth par email
                                 .setAvailableProviders(
                                         Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), // EMAIL
                                                 new AuthUI.IdpConfig.FacebookBuilder().build(), // FACEBOOK
